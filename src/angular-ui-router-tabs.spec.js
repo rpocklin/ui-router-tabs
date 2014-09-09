@@ -13,12 +13,12 @@ beforeEach(function() {
         url: '/menu',
         templateUrl: 'template.html'
       })
-      .state('menu.route2', {
-        url: '/route2',
-        templateURl: 'template.html'
-      }).state('menu.route1', {
+      .state('menu.route1', {
         url: '/route1',
         templateUrl: 'template.html'
+      }).state('menu.route2', {
+        url: '/route2',
+        templateURl: 'template.html'
       });
   });
 
@@ -81,8 +81,6 @@ describe('Directive : UI Router : Tabs', function() {
     $ngView = createView(view, scope);
   }));
 
-  // TODO: it should throw a hissy fit if no data tag declared
-
   it('should define the tabs directive with isolated scope', function() {
     expect(directive_scope).toBeDefined();
   });
@@ -102,7 +100,6 @@ describe('Directive : UI Router : Tabs', function() {
   });
 
   it('should route to the first entry in tabConfiguration array by default', function() {
-    expect(get_current_state()).toEqual(scope.tabConfiguration[0].route);
     expect(get_current_state()).toEqual(scope.tabConfiguration[0].route);
   });
 
