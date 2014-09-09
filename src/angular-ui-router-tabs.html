@@ -1,0 +1,6 @@
+<div>
+    <tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">
+        <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" select="go(tab.route)" active="tab.active">
+        </tab>
+    </tabset>
+</div>
