@@ -1,0 +1,26 @@
+{
+  "name":         "ui-router-tabs",
+  "repository":   "rpocklin/ui-router-tabs",
+  "description":  "Idiot-proof tab panes with route support using Angular.js + Bootstrap 3 + UI Router.",
+  "version":      "1.0.0",
+  "keywords":     [
+    "angular, tabs, ui-router, bootstrap"
+  ],
+  "main":         "src/angular-ui-router-tabs.js",
+  "dependencies": {
+    "angular":           "1.2.16",
+    "angular-bootstrap": "~0.11.0",
+    "angular-ui-router": "0.2.10"
+  },
+  "scripts":      ["src/angular-ui-router-tabs.js"],
+  "development":  {
+    "dependencies": {
+      "angular-mocks": "1.2.16",
+      "sinon":         "1.9.0",
+      "jasmine-sinon": "0.3.1",
+      "underscore":    "~1.7.0",
+      "jquery":        "~2.1.1"
+    }
+  },
+  "license":      "MIT"
+}
