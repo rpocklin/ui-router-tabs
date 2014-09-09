@@ -10,12 +10,13 @@
     "time-grunt": "~0.2.1",
     "grunt-karma": "~0.6.2",
     "karma-jasmine": "~0.1.5",
-    "karma-phantomjs-launcher": "~0.1.2",
+    "karma-phantomjs-launcher": "~0.1.4",
     "karma": "~0.10.9",
     "karma-coverage": "~0.2.4",
     "grunt-cli": "~0.1.13",
     "grunt-jsbeautifier": "~0.2.7",
-    "karma-ng-html2js-preprocessor": "~0.1.0"
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "phantomjs": "~1.9.7-15"
   },
   "engines": {
     "node": ">=0.10.0"

@@ -116,7 +116,7 @@ describe('Directive : UI Router : Tabs', function() {
 
     spy = this.sandbox.spy(state, 'go');
 
-    $ngView.find('a').get(current_active_tab_index).click();
+    $ngView.find('a').eq(current_active_tab_index).click();
     expect(spy).not.toHaveBeenCalled();
     expect(get_current_state()).toEqual(previous_state);
   });
@@ -133,7 +133,7 @@ describe('Directive : UI Router : Tabs', function() {
 
     spy = this.sandbox.spy(state, 'go');
 
-    $ngView.find('a').get(non_active_tab_index).click();
+    $ngView.find('a').eq(non_active_tab_index).click();
 
     expect(spy).toHaveBeenCalled();
     expect(get_current_state()).not.toEqual(previous_state);

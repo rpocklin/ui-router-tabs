@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         options:    {
           logLevel: 'DEBUG'
         },
-        browsers:   ['Chrome'],
+        browsers:   ['PhantomJS'],
         configFile: 'karma.conf.js',
         singleRun:  true,
         autoWatch:  false
