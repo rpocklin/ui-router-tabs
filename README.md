@@ -5,6 +5,10 @@ Leverages UI Bootstrap and UI Router to give you full-strength route-driven tabs
 
 ## Example
 
+### Online
+[Link](http://rpocklin.github.io/ui-router-tabs/example/index.html)
+
+### Locally
 1. Checkout git repository locally.
 1. `npm install`
 1. `bower install`
