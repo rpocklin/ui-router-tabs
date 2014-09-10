@@ -7,9 +7,15 @@
     "angular, tabs, ui-router, bootstrap"
   ],
   "ignore": [
-    "example",
+    "**/.*",
     "*.yml",
-    ".jshintrc"
+    ".jshintrc",
+    "node_modules",
+    "bower_components",
+    "example",
+    "Gruntfile.js",
+    "package.json",
+    "bower.json"
   ],
   "dependencies": {
     "angular": "1.2.16",
