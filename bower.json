@@ -2,7 +2,7 @@
   "name": "angular-ui-router-tabs",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "src/angular-ui-router-tabs.js",
+  "main": "src/ui-router-tabs.js",
   "keywords": [
     "angular, tabs, ui-router, bootstrap"
   ],
@@ -21,6 +21,7 @@
     "sinon": "1.9.0",
     "jasmine-sinon": "0.3.1",
     "underscore": "~1.7.0",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0"
   }
 }

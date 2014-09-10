@@ -2,23 +2,19 @@
 
 beforeEach(function() {
 
-  module('templates');
-  module('angular-ui-tabs-directive');
+  module('ui.router.tabs');
   module('ui.router');
   module('ui.bootstrap');
 
   module(function($stateProvider) {
     $stateProvider
       .state('menu', {
-        url: '/menu',
-        templateUrl: 'template.html'
+        url: '/menu'
       })
       .state('menu.route1', {
-        url: '/route1',
-        templateUrl: 'template.html'
+        url: '/route1'
       }).state('menu.route2', {
-        url: '/route2',
-        templateURl: 'template.html'
+        url: '/route2'
       });
   });
 

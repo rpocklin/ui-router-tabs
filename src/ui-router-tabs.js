@@ -20,8 +20,8 @@
  *
  */
 
-angular.module('angular-ui-tabs-directive', ['ui.bootstrap', 'ui.router']);
-angular.module('angular-ui-tabs-directive').directive('tabs', function($state) {
+angular.module('ui.router.tabs', []);
+angular.module('ui.router.tabs').directive('tabs', function($state) {
 
   return {
     restrict: 'E',
@@ -33,7 +33,6 @@ angular.module('angular-ui-tabs-directive').directive('tabs', function($state) {
       vertical: '@'
     },
     compile: function(element, attributes) {
-
       if (!attributes.data) {
         throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
       }
@@ -55,7 +54,17 @@ angular.module('angular-ui-tabs-directive').directive('tabs', function($state) {
 
     },
     templateUrl: function(element, attributes) {
-      return attributes.templateUrl || 'angular-ui-router-tabs.html';
+      return attributes.templateUrl || 'ui-router-tabs-default-template.html';
     }
   };
-});
+}).run(['$templateCache',
+  function($templateCache) {
+    var DEFAULT_TEMPLATE = '<div>' +
+      '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
+      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" select="go(tab.route)" active="tab.active">' +
+      '  </tab>' +
+      '</tabset>' +
+      '</div>';
+
+    $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
+}]);

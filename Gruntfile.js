@@ -8,6 +8,25 @@ module.exports = function(grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    connect: {
+             server: {
+               options: {
+                 port: 9000
+               }
+             }
+    },
+
+    watch: {
+           scripts: {
+                    files: ['src/**/*'],
+                    tasks: ['jshint', 'karma'],
+                    options: {
+                             spawn: false
+                    }
+           }
+
+    },
+
     // verifies we have formatted our js and HTML according to our style conventions
     jsbeautifier: {
       files:   ['!Gruntfile.js', '!npm-shrinkwrap.json', 'src/**/*.{html,js}', '!app/bower_components/**/*'],
@@ -57,6 +76,7 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.registerTask('serve', ['connect', 'watch']);
   grunt.registerTask('default', [
     'jsbeautifier', 'jshint', 'karma'
   ]);
