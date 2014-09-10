@@ -22,7 +22,7 @@ Leverages UI Bootstrap and UI Router to give you full-strength route-driven tabs
 [Link](https://github.com/angular-ui/ui-router)
 
 ## UI Bootstrap - Tabs
-[Link](http://angular-ui.github.io/bootstrap/#/tabs)
+[Link](http://angular-ui.github.io/bootstrap/)
 
 See configurable options, notably:
 
