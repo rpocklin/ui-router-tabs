@@ -29,6 +29,8 @@ describe('Directive : UI Router : Tabs', function() {
 
   var scope, directive_scope, view, element, state, stub, spy, createView, get_current_state, get_active_tab;
   var $ngView;
+  var params = {};
+  var options = {};
 
   beforeEach(inject(function($rootScope, $state, $templateCache) {
 
@@ -63,18 +65,20 @@ describe('Directive : UI Router : Tabs', function() {
     scope.tabConfiguration = [
       {
         heading: 'Heading 1',
-        route: 'menu.route1',
-        active: true
+        route: 'menu.route1'
       },
       {
         heading: 'Heading 2',
         route: 'menu.route2',
-        active: false
+        params: params,
+        options: options
       }
     ];
 
     view = '<tabs data="tabConfiguration" type="pills"></tabs>';
     $ngView = createView(view, scope);
+
+    spy = this.sandbox.spy(state, 'go');
   }));
 
   it('should define the tabs directive with isolated scope', function() {
@@ -107,8 +111,6 @@ describe('Directive : UI Router : Tabs', function() {
       route: previous_state
     }));
 
-    spy = this.sandbox.spy(state, 'go');
-
     $ngView.find('a').eq(current_active_tab_index).click();
     expect(spy).not.toHaveBeenCalled();
     expect(get_current_state()).toEqual(previous_state);
@@ -124,11 +126,9 @@ describe('Directive : UI Router : Tabs', function() {
 
     var non_active_tab_index = _.indexOf(scope.tabConfiguration, non_active_tab);
 
-    spy = this.sandbox.spy(state, 'go');
-
     $ngView.find('a').eq(non_active_tab_index).click();
 
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith('menu.route2', params, options);
     expect(get_current_state()).not.toEqual(previous_state);
   });
 });

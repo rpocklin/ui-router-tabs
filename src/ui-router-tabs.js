@@ -39,8 +39,8 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
     },
     controller: function($scope) {
 
-      $scope.go = function(route) {
-        $state.go(route);
+      $scope.go = function(route, params, options) {
+        $state.go(route, params, options);
       };
 
       $scope.active = function(route) {
@@ -50,6 +50,8 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
       // sets which tab is active (used for highlighting)
       angular.forEach($scope.tabs, function(tab) {
         tab.active = $scope.active(tab.route);
+        tab.params = tab.params || {};
+        tab.options = tab.options || {};
       });
 
     },
@@ -61,7 +63,7 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
   function($templateCache) {
     var DEFAULT_TEMPLATE = '<div>' +
       '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
-      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" select="go(tab.route)" active="tab.active">' +
+      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" select="go(tab.route, tab.params, tab.options)" active="tab.active">' +
       '  </tab>' +
       '</tabset>' +
       '</div>';
