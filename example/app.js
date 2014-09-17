@@ -10,6 +10,7 @@ app.config(function($stateProvider) {
 
   $stateProvider.state('user', {
     url:         '',
+    controller: 'UserCtrl',
     templateUrl: 'example.html'
   }).state('user.settings', {
     url:         '/user/settings',
