@@ -14,17 +14,10 @@ app.config(function($stateProvider) {
     templateUrl: 'example.html'
   }).state('user.settings', {
     url:         '/user/settings',
-    templateUrl: 'user/settings.html',
-    controller: 'SettingsCtrl'
+    templateUrl: 'user/settings.html'
   }).state('user.accounts', {
     url:         '/user/accounts',
     templateUrl: 'user/accounts.html'
-  }).state('user.settings.one', {
-    url:         '/user/settings',
-    template: '<div>one</div>'
-  }).state('user.accounts.two', {
-    url:         '/user/accounts',
-    template: '<div>two</div>'
   });
 
 });
