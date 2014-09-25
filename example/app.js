@@ -25,5 +25,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
   }).state('user.settings.two', {
     url:         '/user/settings/two',
     template: '<div>two</div>'
+  }).state('user.accounts', {
+    url:         '/user/accounts',
+    templateUrl: 'user/accounts.html'
   });
 });
