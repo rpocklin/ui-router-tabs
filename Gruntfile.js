@@ -73,11 +73,20 @@ module.exports = function(grunt) {
         singleRun:  true,
         autoWatch:  false
       }
+    },
+    coveralls: {
+      options: {
+        coverage_dir:'coverage',
+        directory:'coverage/PhantomJS 1.9.7 (Mac OS X)/lcov.info',
+        debug: true,
+        dryRun: false,
+        recursive: false
+      }
     }
   });
 
   grunt.registerTask('serve', ['connect', 'watch']);
   grunt.registerTask('default', [
-    'jsbeautifier', 'jshint', 'karma'
+    'jsbeautifier', 'jshint', 'karma', 'coveralls'
   ]);
 };

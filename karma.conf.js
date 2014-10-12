@@ -4,7 +4,7 @@
 module.exports = function(config) {
   config.set({
     // base path, that will be used to resolve files and exclude
-    basePath:   '',
+    basePath: '',
 
     // testing framework to use (jasmine/mocha/q  unit/...)
     frameworks: ['jasmine'],
@@ -46,9 +46,12 @@ module.exports = function(config) {
 
     // optionally, configure the reporter
     coverageReporter: {
+      dir: 'coverage',
+      subdir: '.',
       reporters: [
         {type: 'text-summary'},
-        {type: 'lcov'}
+        {type: 'lcov'},
+        {type: 'clover'}
       ]
     }
   });
