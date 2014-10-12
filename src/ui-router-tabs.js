@@ -44,19 +44,12 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
     controller: function($scope) {
 
       $scope.go = function(route, params, options) {
-
-        if ($scope.active() || $state.is(route)) {
-          return;
-        }
-
         $state.go(route, params, options);
       };
 
       $scope.active = function(route) {
         return $state.is(route);
       };
-
-      var current_tab;
 
       // sets which tab is active (used for highlighting)
       angular.forEach($scope.tabs, function(tab) {
@@ -65,13 +58,13 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
         tab.options = tab.options || {};
 
         if (tab.active) {
-          current_tab = tab;
+          $scope.current_tab = tab;
         }
       });
 
       // if none are active, set the default
-      current_tab = current_tab || $scope.tabs[0];
-      $scope.go(current_tab.route, current_tab.params, current_tab.options);
+      $scope.current_tab = $scope.current_tab || $scope.tabs[0];
+      $state.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
 
     },
     templateUrl: function(element, attributes) {

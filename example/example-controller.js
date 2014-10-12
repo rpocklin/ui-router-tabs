@@ -1,6 +1,6 @@
 'use strict';
 
-var UserCtrl = function($rootScope, $scope) {
+var ExampleCtrl = function($rootScope, $scope) {
 
   $scope.initialise = function() {
 
@@ -19,4 +19,4 @@ var UserCtrl = function($rootScope, $scope) {
   $scope.initialise();
 };
 
-angular.module('example').controller('UserCtrl', UserCtrl);
+angular.module('example').controller('ExampleCtrl', ExampleCtrl);
