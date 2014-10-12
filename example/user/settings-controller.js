@@ -11,7 +11,7 @@ var SettingsCtrl = function($rootScope, $scope) {
       },
       {
         heading: 'Two',
-        route:   'user.accounts.two'
+        route:   'user.settings.two'
       }
     ];
   };

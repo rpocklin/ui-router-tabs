@@ -36,10 +36,19 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
       if (!attributes.data) {
         throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
       }
+
+      if (!attributes.data.length) {
+        throw new Error('\'data\' attribute must be an array of tab data with at least one tab defined.');
+      }
     },
     controller: function($scope) {
 
       $scope.go = function(route, params, options) {
+
+        if ($scope.active() || $state.is(route)) {
+          return;
+        }
+
         $state.go(route, params, options);
       };
 
@@ -47,12 +56,22 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
         return $state.is(route);
       };
 
+      var current_tab;
+
       // sets which tab is active (used for highlighting)
       angular.forEach($scope.tabs, function(tab) {
         tab.active = $scope.active(tab.route);
         tab.params = tab.params || {};
         tab.options = tab.options || {};
+
+        if (tab.active) {
+          current_tab = tab;
+        }
       });
+
+      // if none are active, set the default
+      current_tab = current_tab || $scope.tabs[0];
+      $scope.go(current_tab.route, current_tab.params, current_tab.options);
 
     },
     templateUrl: function(element, attributes) {

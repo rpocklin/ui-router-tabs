@@ -6,25 +6,24 @@ var app = angular.module('example', [
   'ui.router.tabs'
 ]);
 
-app.config(function($stateProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider.state('user', {
     url:         '',
     controller: 'UserCtrl',
     templateUrl: 'example.html'
+  }).state('user.accounts', {
+    url:         '/user/accounts',
+    templateUrl: 'user/accounts.html'
   }).state('user.settings', {
     url:         '/user/settings',
     templateUrl: 'user/settings.html',
     controller: 'SettingsCtrl'
-  }).state('user.accounts', {
-    url:         '/user/accounts',
-    templateUrl: 'user/accounts.html'
   }).state('user.settings.one', {
-    url:         '/user/settings',
+    url:         '/user/settings/one',
     template: '<div>one</div>'
-  }).state('user.accounts.two', {
-    url:         '/user/accounts',
+  }).state('user.settings.two', {
+    url:         '/user/settings/two',
     template: '<div>two</div>'
   });
-
 });
