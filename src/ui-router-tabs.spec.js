@@ -31,10 +31,13 @@ describe('Directive : UI Router : Tabs', function() {
   var $ngView;
   var params = {};
   var options = {};
+  var timeout;
 
-  beforeEach(inject(function($rootScope, $state, $templateCache) {
+  beforeEach(inject(function($rootScope, $state, $templateCache, $timeout) {
 
     $templateCache.put('template.html', '');
+
+    timeout = $timeout;
 
     createView = function(html, scope) {
       element = angular.element(view);
@@ -112,6 +115,7 @@ describe('Directive : UI Router : Tabs', function() {
     }));
 
     $ngView.find('a').eq(current_active_tab_index).click();
+    expect(spy).not.toHaveBeenCalled();
     expect(get_current_state()).toEqual(previous_state);
   });
 
@@ -126,8 +130,9 @@ describe('Directive : UI Router : Tabs', function() {
     var non_active_tab_index = _.indexOf(scope.tabConfiguration, non_active_tab);
 
     $ngView.find('a').eq(non_active_tab_index).click();
+    timeout.flush();
 
-    expect(spy).toHaveBeenCalledWith('menu.route2', params, options);
+    expect(spy).toHaveBeenCalledWith('menu.route2');
     expect(get_current_state()).not.toEqual(previous_state);
   });
 });
