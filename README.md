@@ -66,11 +66,10 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 
 ## Tips
 
-* You can override the default directive template by specifying `template-url="my_template.html" on the `<tabs>` element.
+* You can override the default directive template by specifying `template-url="my_template.html"` on the `<tabs>` element.
 * You can use `<tab-heading>` in a custom directive template to add any HTML into the tab title.
-* You can move the `<tabs>` tag around to wherever you want the tab listing to appear.
-* Left-positioned seems the best spot for responsive design.
 * You can update the `tabData` variable dynamically, if you want to.
+* You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.)
 
 ## Running Locally
 
@@ -87,7 +86,14 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+5. Create a new Pull Request
+
+
+## History
+
+* 1.1.0 Added nested tab support (tabs within tabs)
+* 1.0.0 Initial release
+
 
 ## License
 
