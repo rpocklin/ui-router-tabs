@@ -33,22 +33,20 @@ angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) 
       justified: '@',
       vertical: '@'
     },
-    compile: function(element, attributes) {
-      if (!attributes.data) {
-        throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
-      }
+    link: function(scope) {
 
-      return function(scope) {
+      var unbindStateChangeSuccess = $rootScope.$on('$stateChangeSuccess',
+      function() {
+        scope.update_tabs();
+      });
 
-        var unbindStateChangeSuccess = $rootScope.$on('$stateChangeSuccess',
-          function() {
-            scope.update_tabs();
-          });
-
-        scope.$on('$destroy', unbindStateChangeSuccess);
-      };
+      scope.$on('$destroy', unbindStateChangeSuccess);
     },
     controller: function($scope) {
+
+      if (!$scope.tabs) {
+        throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
+      }
 
       if (!angular.isArray($scope.tabs)) {
         throw new Error('\'data\' attribute must be an array of tab data with at least one tab defined.');
@@ -91,12 +89,12 @@ angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) 
 }).run(['$templateCache',
   function($templateCache) {
     var DEFAULT_TEMPLATE = '<div>' +
-      '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
-      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ui-sref="{{tab.route}}(tab.params)"' +
-      '    ui-sref-opts="{{tab.options}}" active="tab.active">' +
-      '  </tab>' +
-      '</tabset>' +
-      '</div>';
+    '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
+    '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ui-sref="{{tab.route}}(tab.params)"' +
+    '    ui-sref-opts="{{tab.options}}" active="tab.active">' +
+    '  </tab>' +
+    '</tabset>' +
+    '</div>';
 
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
   }]);
