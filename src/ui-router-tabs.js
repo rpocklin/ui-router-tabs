@@ -13,6 +13,8 @@
  *
  * You can define (for styling) the attributes type="pills" and vertical="true | false" and justified="true | false"
  *
+ * Uses a $rootScope watcher to explicitly update the parent tab(s) when using $state.go or ui-sref anchors.
+ *
  * See tab-directive.spec.js for usage examples.
  *
  * Author: Robert Pocklington (rpocklin@gmail.com)
@@ -21,7 +23,7 @@
  */
 
 angular.module('ui.router.tabs', []);
-angular.module('ui.router.tabs').directive('tabs', function($state) {
+angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) {
 
   return {
     restrict: 'E',
@@ -36,11 +38,21 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
         throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
       }
 
-      if (!attributes.data.length) {
-        throw new Error('\'data\' attribute must be an array of tab data with at least one tab defined.');
-      }
+      return function(scope) {
+
+        var unbindStateChangeSuccess = $rootScope.$on('$stateChangeSuccess',
+          function() {
+            scope.update_tabs();
+          });
+
+        scope.$on('$destroy', unbindStateChangeSuccess);
+      };
     },
     controller: function($scope) {
+
+      if (!angular.isArray($scope.tabs)) {
+        throw new Error('\'data\' attribute must be an array of tab data with at least one tab defined.');
+      }
 
       $scope.go = function(route, params, options) {
         $state.go(route, params, options);
@@ -51,16 +63,22 @@ angular.module('ui.router.tabs').directive('tabs', function($state) {
         return isAncestorOfCurrentRoute;
       };
 
-      // sets which tab is active (used for highlighting)
-      angular.forEach($scope.tabs, function(tab) {
-        tab.active = $scope.active(tab.route);
-        tab.params = tab.params || {};
-        tab.options = tab.options || {};
+      $scope.update_tabs = function() {
 
-        if (tab.active) {
-          $scope.current_tab = tab;
-        }
-      });
+        // sets which tab is active (used for highlighting)
+        angular.forEach($scope.tabs, function(tab) {
+          tab.active = $scope.active(tab.route);
+          tab.params = tab.params || {};
+          tab.options = tab.options || {};
+
+          if (tab.active) {
+            $scope.current_tab = tab;
+          }
+        });
+      };
+
+      // initialise tabs when creating the directive
+      $scope.update_tabs();
 
       // if none are active, set the default
       $scope.current_tab = $scope.current_tab || $scope.tabs[0];
