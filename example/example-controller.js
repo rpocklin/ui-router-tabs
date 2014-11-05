@@ -1,8 +1,12 @@
 'use strict';
 
-var ExampleCtrl = function($rootScope, $scope) {
+var ExampleCtrl = function($rootScope, $state, $scope) {
 
   $scope.initialise = function() {
+
+    $scope.go = function(state) {
+      $state.go(state);
+    };
 
     $scope.tabData   = [
       {
