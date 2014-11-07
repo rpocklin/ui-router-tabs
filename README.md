@@ -91,7 +91,7 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 
 ## History
 
-* 1.1.2 Added `$stateChangeSuccess` watcher to update parent tab(s) when using `ui-sref` or `$state.go()`.  Fixes issue #1.
+* 1.1.2 Added `$stateChangeSuccess` watcher to update parent tab(s) when using <br/>`ui-sref` or `$state.go()`.  See [#1](/../../issues/1).
 * 1.1.0 Added nested tab support (tabs within tabs)
 * 1.0.0 Initial release
 
