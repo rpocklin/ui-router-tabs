@@ -63,7 +63,6 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 - `justified: boolean`
 
 
-
 ## Tips
 
 * You can override the default directive template by specifying `template-url="my_template.html"` on the `<tabs>` element.
@@ -71,13 +70,14 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 * You can update the `tabData` variable dynamically, if you want to.
 * You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.)
 
+
 ## Running Locally
 
 1. Checkout git repository locally: `git clone git@github.com:rpocklin/ui-router-tabs.git`
 1. `npm install`
 1. `bower install`
 1. `grunt serve`
-1. View `http://localhost:9000/example/`in your browser to see the example.
+1. View `http://localhost:9000/example/` in your browser to see the example.
 
 
 ## Contributing
@@ -91,6 +91,7 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 
 ## History
 
+* 1.1.2 Added `$stateChangeSuccess` watcher to update parent tab(s) when using `ui-sref` or `$state.go()`.  Fixes issue #1.
 * 1.1.0 Added nested tab support (tabs within tabs)
 * 1.0.0 Initial release
 
