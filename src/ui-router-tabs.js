@@ -36,9 +36,9 @@ angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) 
     link: function(scope) {
 
       var unbindStateChangeSuccess = $rootScope.$on('$stateChangeSuccess',
-      function() {
-        scope.update_tabs();
-      });
+        function() {
+          scope.update_tabs();
+        });
 
       scope.$on('$destroy', unbindStateChangeSuccess);
     },
@@ -89,12 +89,12 @@ angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) 
 }).run(['$templateCache',
   function($templateCache) {
     var DEFAULT_TEMPLATE = '<div>' +
-    '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
-    '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ui-sref="{{tab.route}}(tab.params)"' +
-    '    ui-sref-opts="{{tab.options}}" active="tab.active">' +
-    '  </tab>' +
-    '</tabset>' +
-    '</div>';
+      '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
+      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ui-sref="{{tab.route}}(tab.params)"' +
+      '    ui-sref-opts="{{tab.options}}" active="tab.active">' +
+      '  </tab>' +
+      '</tabset>' +
+      '</div>';
 
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
   }]);
