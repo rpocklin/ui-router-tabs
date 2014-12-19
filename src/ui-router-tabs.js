@@ -23,7 +23,7 @@
  */
 
 angular.module('ui.router.tabs', []);
-angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) {
+angular.module('ui.router.tabs').directive('tabs', [ '$rootScope', '$state', function($rootScope, $state) {
 
   return {
     restrict: 'E',
@@ -42,7 +42,7 @@ angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) 
 
       scope.$on('$destroy', unbindStateChangeSuccess);
     },
-    controller: function($scope) {
+    controller: [ '$scope', function($scope) {
 
       if (!$scope.tabs) {
         throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
@@ -81,12 +81,12 @@ angular.module('ui.router.tabs').directive('tabs', function($rootScope, $state) 
       // if none are active, set the default
       $scope.current_tab = $scope.current_tab || $scope.tabs[0];
       $scope.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
-    },
+    }],
     templateUrl: function(element, attributes) {
       return attributes.templateUrl || 'ui-router-tabs-default-template.html';
     }
   };
-}).run(['$templateCache',
+}]).run(['$templateCache',
   function($templateCache) {
     var DEFAULT_TEMPLATE = '<div>' +
       '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
