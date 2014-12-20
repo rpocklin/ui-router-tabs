@@ -1,6 +1,6 @@
 'use strict';
 
-var SettingsCtrl = function($rootScope, $scope) {
+var SettingsCtrl = ['$rootScope', '$scope', function($rootScope, $scope) {
 
   $scope.initialise = function() {
 
@@ -17,6 +17,6 @@ var SettingsCtrl = function($rootScope, $scope) {
   };
 
   $scope.initialise();
-};
+}];
 
 angular.module('example').controller('SettingsCtrl', SettingsCtrl);

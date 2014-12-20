@@ -6,7 +6,7 @@ var app = angular.module('example', [
   'ui.router.tabs'
 ]);
 
-app.config(function($stateProvider) {
+app.config(['$stateProvider', function($stateProvider) {
   $stateProvider.state('user', {
     url:         '',
     controller: 'ExampleCtrl',
@@ -25,4 +25,4 @@ app.config(function($stateProvider) {
     url:         '/user/settings/two',
     template: '<div>Settings nested route 2</div>'
   });
-});
+}]);
