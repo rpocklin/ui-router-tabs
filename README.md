@@ -84,13 +84,15 @@ Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap co
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
+3. Commit your changes (`git commit -am 'Added some feature'`) - please consider adding tests!
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+5. Run `grunt` and ensure there are no errors.
+6. Create a new Pull Request
 
 
 ## History
 
+* 1.1.4 Added support for `strict-di` mode.
 * 1.1.3 Fixed tab switching when using `ngTouch`.  See [#2](/../../issues/2).
 * 1.1.2 Added `$stateChangeSuccess` watcher to update parent tab(s) when using <br/>`ui-sref` or `$state.go()`.  See [#1](/../../issues/1).
 * 1.1.0 Added nested tab support (tabs within tabs)
