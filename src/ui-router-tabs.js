@@ -94,6 +94,7 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
       '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
       '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ui-sref="{{tab.route}}(tab.params)"' +
       '    ui-sref-opts="{{tab.options}}" ng-click active="tab.active">' +
+      '     <ui-view></ui-view>'+
       '  </tab>' +
       '</tabset>' +
       '</div>';
