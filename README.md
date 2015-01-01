@@ -14,45 +14,45 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 1. Add `ui.router.tabs` as a new module dependency in your angular app.
 
 1. Define your routes in a hierarchy that makes sense for a tabbed layout, Eg:
-```javascript
-    $stateProvider.state('user', {
-      url:         '',
-      controller: 'UserCtrl',
-      templateUrl: 'example.html'
-    }).state('user.settings', {
-      url:         '/user/settings',
-      templateUrl: 'user/settings.html'
-    }).state('user.accounts', {
-      url:         '/user/accounts',
-      templateUrl: 'user/accounts.html'
-    });
-```
+  ```javascript
+      $stateProvider.state('user', {
+        url:         '',
+        controller: 'UserCtrl',
+        templateUrl: 'example.html'
+      }).state('user.settings', {
+        url:         '/user/settings',
+        templateUrl: 'user/settings.html'
+      }).state('user.accounts', {
+        url:         '/user/accounts',
+        templateUrl: 'user/accounts.html'
+      });
+  ```
 
 1. Define your `tabData` (or similiar variable) in the root view controller of your tabs (ie. `UserCtrl` in the case above) Eg:
-```javascript
-    $scope.tabData   = [
-      {
-        heading: 'Settings',
-        route:   'user.settings'
-      },
-      {
-        heading: 'Accounts',
-        route:   'user.accounts'
-      }
-    ];
-```
+  ```javascript
+      $scope.tabData   = [
+        {
+          heading: 'Settings',
+          route:   'user.settings'
+        },
+        {
+          heading: 'Accounts',
+          route:   'user.accounts'
+        }
+      ];
+  ```
 
   NOTE: You can also specify `params` and `options` to pass special parameters or options for the target route to UI Router, Eg:
-```javascript
-    {
-      heading: 'Accounts',
-      route:   'user.accounts',
-      params: {
-                accountId: account.id
-              },
-      options: {}
-    }
-```
+  ```javascript
+      {
+        heading: 'Accounts',
+        route:   'user.accounts',
+        params: {
+                  accountId: account.id
+                },
+        options: {}
+      }
+  ```
 
 1. Declare the following in your the parent HTML view template `<tabs data="tabData" type="tabs" />`.
 
