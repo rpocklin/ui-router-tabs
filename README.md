@@ -42,7 +42,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
     ];
 ```
 
-NOTE: You can also specify `params` and `options` to pass special parameters or options for the target route to UI Router, Eg:
+  NOTE: You can also specify `params` and `options` to pass special parameters or options for the target route to UI Router, Eg:
 ```javascript
     {
       heading: 'Accounts',
@@ -56,11 +56,13 @@ NOTE: You can also specify `params` and `options` to pass special parameters or 
 
 1. Declare the following in your the parent HTML view template `<tabs data="tabData" type="tabs" />`.
 
-Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap component) are:
+  Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap component) are:
 
-- `type: [ 'tabs' | 'pills' ]`
-- `vertical: boolean`
-- `justified: boolean`
+  * `type: [ 'tabs' | 'pills' ]`
+  * `vertical: boolean`
+  * `justified: boolean`
+
+1. Define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
 
 
 ## Tips
