@@ -58,8 +58,8 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
             $state.go(route, params, options);
           };
 
-          $scope.active = function(route) {
-            var isAncestorOfCurrentRoute = $state.includes(route);
+          $scope.active = function(route, params, options) {
+            var isAncestorOfCurrentRoute = $state.includes(route, params, options);
             return isAncestorOfCurrentRoute;
           };
 
@@ -67,9 +67,9 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
 
             // sets which tab is active (used for highlighting)
             angular.forEach($scope.tabs, function(tab) {
-              tab.active = $scope.active(tab.route);
               tab.params = tab.params || {};
               tab.options = tab.options || {};
+              tab.active = $scope.active(tab.route, tab.params, tab.options);
 
               if (tab.active) {
                 $scope.current_tab = tab;
