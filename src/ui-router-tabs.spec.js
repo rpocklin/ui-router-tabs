@@ -139,6 +139,7 @@ describe('Directive : UI Router : Tabs', function() {
     timeout.flush();
 
     expect(get_current_state()).toEqual(previous_state);
+    expect(spy.notCalled).toBeTruthy();
   });
 
   it('should change the route and update the tabs when selecting a different tab', function() {

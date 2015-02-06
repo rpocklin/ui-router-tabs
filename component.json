@@ -2,7 +2,7 @@
   "name":         "ui-router-tabs",
   "repository":   "rpocklin/ui-router-tabs",
   "description":  "Idiot-proof tab panes with route support using Angular.js + Bootstrap 3 + UI Router.",
-  "version":      "1.1.4",
+  "version":      "1.2.0",
   "keywords":     [
     "angular, tabs, ui-router, bootstrap"
   ],

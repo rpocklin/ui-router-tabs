@@ -77,7 +77,7 @@ module.exports = function(grunt) {
     coveralls: {
       options: {
         coverage_dir:'coverage',
-        directory:'coverage/PhantomJS 1.9.7 (Mac OS X)/lcov.info',
+        directory:'coverage/lcov.info',
         debug: true,
         dryRun: false,
         recursive: false
