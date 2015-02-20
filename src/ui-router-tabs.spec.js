@@ -31,7 +31,7 @@ afterEach(function() {
 describe('Directive : UI Router : Tabs', function() {
 
   var root_scope, isolate_scope, scope, directive_scope, view, element, state, spy, update_tabs_spy;
-  var createView, non_active_tab, get_current_state, get_active_tab;
+  var createView, non_active_tab, get_current_state, get_active_tab, get_current_params;
   var $ngView;
   var params = {};
   var options = {};
@@ -65,6 +65,10 @@ describe('Directive : UI Router : Tabs', function() {
       return state.current.name;
     };
 
+    get_current_params = function() {
+      return state.params;
+    };
+
     non_active_tab = function() {
       return _.findWhere(scope.tabConfiguration, {
         active: false
@@ -79,14 +83,18 @@ describe('Directive : UI Router : Tabs', function() {
 
     scope.tabConfiguration = [
       {
-        heading: 'Heading 1',
+        heading: 'Heading 1A',
         route: 'menu.route1'
+      },
+      {
+        heading: 'Heading 1B',
+        route: 'menu.route1',
+        params: {a:5}
       },
       {
         heading: 'Heading 2',
         route: 'menu.route2',
-        params: params,
-        options: options
+        params: params
       }
     ];
 
@@ -129,14 +137,14 @@ describe('Directive : UI Router : Tabs', function() {
 
   it('should not change the route when selecting the current tab', function() {
 
+    $ngView.find('a').eq(0).click();
+
+    timeout.flush();
+    spy.reset();
+
     var previous_state = get_current_state();
 
-    var current_active_tab_index = _.indexOf(scope.tabConfiguration, _.findWhere(scope.tabConfiguration, {
-      route: previous_state
-    }));
-
-    $ngView.find('a').eq(current_active_tab_index).click();
-    timeout.flush();
+    $ngView.find('a').eq(0).click();
 
     expect(get_current_state()).toEqual(previous_state);
     expect(spy.notCalled).toBeTruthy();

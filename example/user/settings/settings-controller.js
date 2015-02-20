@@ -1,13 +1,15 @@
 'use strict';
 
-var SettingsCtrl = ['$rootScope', '$scope', function($rootScope, $scope) {
+var SettingsCtrl = ['$rootScope', '$scope', '$stateParams', function($rootScope, $scope, $stateParams) {
 
   $scope.initialise = function() {
 
     $scope.tabData   = [
       {
         heading: 'One',
-        route:   'user.settings.one'
+        route:   'user.settings.one',
+        url: 'user/settings/one/:test',
+        controller: 'ExampleCtrl'
       },
       {
         heading: 'Two',
