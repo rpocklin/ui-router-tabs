@@ -30,11 +30,10 @@ afterEach(function() {
 
 describe('Directive : UI Router : Tabs', function() {
 
-  var root_scope, isolate_scope, scope, directive_scope, view, element, state, spy, update_tabs_spy;
-  var createView, non_active_tab, get_current_state, get_active_tab, get_current_params;
+  var root_scope, isolate_scope, scope, directive_scope, view, element, state, spy;
+  var createView, get_current_state, get_current_params;
   var $ngView;
   var params = {};
-  var options = {};
   var timeout;
 
   beforeEach(inject(function($rootScope, $state, $templateCache, $timeout) {
@@ -69,18 +68,6 @@ describe('Directive : UI Router : Tabs', function() {
       return state.params;
     };
 
-    non_active_tab = function() {
-      return _.findWhere(scope.tabConfiguration, {
-        active: false
-      });
-    };
-
-    get_active_tab = function() {
-      return _.findWhere(directive_scope.tabs, {
-        active: true
-      });
-    };
-
     scope.tabConfiguration = [
       {
         heading: 'Heading 1A',
@@ -103,7 +90,6 @@ describe('Directive : UI Router : Tabs', function() {
 
     isolate_scope = $ngView.isolateScope();
     spy = this.sandbox.spy(state, 'go');
-    update_tabs_spy = this.sandbox.spy(isolate_scope, 'update_tabs');
   }));
 
   it('should define the tabs directive with isolated scope', function() {
@@ -154,24 +140,9 @@ describe('Directive : UI Router : Tabs', function() {
 
     var previous_state = get_current_state();
 
-    var another_tab = non_active_tab();
-    var non_active_tab_index = _.indexOf(scope.tabConfiguration, another_tab);
-
-    $ngView.find('a').eq(non_active_tab_index).click();
+    $ngView.find('a').eq(2).click();
     timeout.flush();
 
-    expect(spy).toHaveBeenCalledWith(another_tab.route);
     expect(get_current_state()).not.toEqual(previous_state);
-    expect(update_tabs_spy).toHaveBeenCalled();
-  });
-
-  it('should unbind the stateChangeSuccess event binding once the controller with the tabs is destroyed', function() {
-    scope.$destroy();
-
-    var another_tab = 'notabs';
-    state.go(another_tab);
-    timeout.flush();
-
-    expect(update_tabs_spy).not.toHaveBeenCalled();
   });
 });
