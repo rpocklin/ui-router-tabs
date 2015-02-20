@@ -76,7 +76,9 @@ describe('Directive : UI Router : Tabs', function() {
       {
         heading: 'Heading 1B',
         route: 'menu.route1',
-        params: {a:5}
+        params: {
+          a: 5
+        }
       },
       {
         heading: 'Heading 2',
