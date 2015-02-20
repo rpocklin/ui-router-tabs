@@ -1,6 +1,6 @@
 'use strict';
 
-var ExampleCtrl = ['$rootScope', '$state', '$scope', function($rootScope, $state, $scope) {
+var ExampleCtrl = ['$rootScope', '$state', '$scope', '$stateParams', function($rootScope, $state, $scope) {
 
   $scope.initialise = function() {
 
@@ -11,11 +11,18 @@ var ExampleCtrl = ['$rootScope', '$state', '$scope', function($rootScope, $state
     $scope.tabData   = [
       {
         heading: 'Settings',
-        route:   'user.settings'
+        route:   'user.settings',
+        params: {}
       },
       {
         heading: 'Accounts',
-        route:   'user.accounts'
+        route:   'user.accounts',
+        params : {}
+      },
+      {
+        heading: 'Accounts With Params',
+        route:   'user.accounts',
+        params: {a: 5}
       }
     ];
   };

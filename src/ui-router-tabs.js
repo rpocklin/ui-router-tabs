@@ -54,12 +54,20 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
             throw new Error('\'data\' attribute must be an array of tab data with at least one tab defined.');
           }
 
-          $scope.go = function(route, params, options) {
-            $state.go(route, params, options);
+          var currentStateEqualTo = function(route, params, options) {
+            var isEqual = $state.is(route, params, options);
+            return isEqual;
           };
 
-          $scope.active = function(route, params, options) {
-            var isAncestorOfCurrentRoute = $state.includes(route, params, options);
+          $scope.go = function(route, params, options) {
+            if (!currentStateEqualTo(route, params, options)) {
+              $state.go(route, params, options);
+            }
+          };
+
+          /* whether to highlight given route as part of the current state */
+          $scope.active = function(tab) {
+            var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
             return isAncestorOfCurrentRoute;
           };
 
@@ -67,11 +75,10 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
 
             // sets which tab is active (used for highlighting)
             angular.forEach($scope.tabs, function(tab) {
-              tab.params = tab.params || {};
-              tab.options = tab.options || {};
-              tab.active = $scope.active(tab.route, tab.params, tab.options);
 
-              if (tab.active) {
+              tab.active = $scope.active(tab);
+
+              if (currentStateEqualTo(tab.route, tab.params, tab.options)) {
                 $scope.current_tab = tab;
               }
             });
@@ -83,12 +90,6 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
           // if none are active, set the default
           $scope.current_tab = $scope.current_tab || $scope.tabs[0];
           $scope.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
-
-          $scope.changeTab = function(tab) {
-            if (tab.route !== $scope.current_tab.route) {
-              $scope.go(tab.route, tab.params, tab.options);
-            }
-          };
     }],
       templateUrl: function(element, attributes) {
         return attributes.templateUrl || 'ui-router-tabs-default-template.html';
@@ -98,7 +99,7 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
   function($templateCache) {
     var DEFAULT_TEMPLATE = '<div>' +
       '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
-      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ng-click="changeTab(tab)" />' +
+      '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ng-click="go(tab.route, tab.params, tab.options)" />' +
       '</tabset>' +
       '</div>';
 
