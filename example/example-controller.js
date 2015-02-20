@@ -11,18 +11,11 @@ var ExampleCtrl = ['$rootScope', '$state', '$scope', '$stateParams', function($r
     $scope.tabData   = [
       {
         heading: 'Settings',
-        route:   'user.settings',
-        params: {}
+        route:   'user.settings'
       },
       {
         heading: 'Accounts',
-        route:   'user.accounts',
-        params : {}
-      },
-      {
-        heading: 'Accounts With Params',
-        route:   'user.accounts',
-        params: {a: 5}
+        route:   'user.accounts'
       }
     ];
   };
