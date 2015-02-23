@@ -47,11 +47,11 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
         function($scope) {
 
           if (!$scope.tabs) {
-            throw new Error('\'data\' attribute not defined, please check documentation for how to use this directive.');
+            throw new Error('UI Router Tabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
           }
 
           if (!angular.isArray($scope.tabs)) {
-            throw new Error('\'data\' attribute must be an array of tab data with at least one tab defined.');
+            throw new Error('UI Router Tabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
           }
 
           var currentStateEqualTo = function(route, params, options) {
