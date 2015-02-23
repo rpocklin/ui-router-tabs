@@ -93,6 +93,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.3.0 Improve state equality checking to include params and options.
 * 1.2.0 Preventing reload of current state again.  See [#11](/../../pull/11).
 * 1.1.4 Added support for `strict-di` mode.
 * 1.1.3 Fixed tab switching when using `ngTouch`.  See [#2](/../../issues/2).
