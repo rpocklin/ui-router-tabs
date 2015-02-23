@@ -101,14 +101,14 @@ describe('Directive : UI Router : Tabs', function() {
   it('should throw an error if no data attribute was specified', function() {
     expect(function() {
       createView('<tabs></tabs>', scope);
-    }).toThrow('\'data\' attribute not defined, please check documentation for how to use this directive.');
+    }).toThrow('UI Router Tabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
   });
 
   it('should throw an error if no data attributes is not an array', function() {
     expect(function() {
       scope.tabConfiguration = {};
       createView('<tabs data="tabConfiguration"></tabs>', scope);
-    }).toThrow('\'data\' attribute must be an array of tab data with at least one tab defined.');
+    }).toThrow('UI Router Tabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
   });
 
   it('should initialise the tab configuration correctly when defined', function() {

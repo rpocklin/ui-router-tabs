@@ -60,6 +60,7 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
           };
 
           $scope.go = function(route, params, options) {
+
             if (!currentStateEqualTo(route, params, options)) {
               $state.go(route, params, options);
             }
