@@ -6,27 +6,28 @@ var app = angular.module('example', [
   'ui.router.tabs'
 ]);
 
-app.config(['$stateProvider', function($stateProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('user');
 
   $stateProvider.state('user', {
-    url:         '',
+    url:         '/user',
     controller: 'ExampleCtrl',
     templateUrl: 'example.html'
   }).state('user.accounts', {
-    url:         '/user/accounts',
+    url:         '/accounts',
     templateUrl: 'user/accounts.html',
     controller: 'ExampleCtrl'
   }).state('user.settings', {
-    url:         '/user/settings',
+    url:         '/settings',
     params: {test: 5},
     controller: 'SettingsCtrl',
     templateUrl: 'user/settings/settings.html'
   }).state('user.settings.one', {
-    url:         '/user/settings/one',
+    url:         '/one',
     controller: 'ExampleCtrl',
     template: '<div>Settings nested route 1</div>'
   }).state('user.settings.two', {
-    url:         '/user/settings/two',
+    url:         '/two',
     controller: 'ExampleCtrl',
     template: '<div>Settings nested route 2</div>'
   });
