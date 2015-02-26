@@ -88,13 +88,15 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
           };
 
           // initialise tabs when creating the directive
-          $scope.update_tabs();
+		  if($state.current.name) {
+			$scope.update_tabs();
 
-          // if none are active, set the default
-          if (!$scope.current_tab) {
-            $scope.current_tab = $scope.tabs[0];
-            $scope.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
-          }
+			// if none are active, set the default
+			if (!$scope.current_tab) {
+			  $scope.current_tab = $scope.tabs[0];
+			  $scope.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
+			}
+		  }
     }],
       templateUrl: function(element, attributes) {
         return attributes.templateUrl || 'ui-router-tabs-default-template.html';
