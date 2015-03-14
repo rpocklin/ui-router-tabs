@@ -74,6 +74,9 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
 
           $scope.update_tabs = function() {
 
+            var hasActiveTab = false;
+            $scope.current_tab = false;
+
             // sets which tab is active (used for highlighting)
             angular.forEach($scope.tabs, function(tab) {
 
@@ -82,9 +85,17 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
               tab.active = $scope.active(tab);
 
               if (tab.active) {
+                hasActiveTab = true;
                 $scope.current_tab = tab;
               }
+
             });
+
+            if (!hasActiveTab) {
+              $scope.tabs[0].active = true;
+              $scope.current_tab = $scope.tabs[0];
+            }
+
           };
 
           // initialise tabs when creating the directive
