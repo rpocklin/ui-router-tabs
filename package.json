@@ -14,7 +14,7 @@
     "karma": "~0.10.9",
     "karma-coverage": "~0.2.4",
     "grunt-cli": "~0.1.13",
-    "grunt-jsbeautifier": "~0.2.7",
+    "grunt-jsbeautifier": "^0.2.10",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "phantomjs": "~1.9.7-15",
     "grunt-contrib-watch": "~0.6.1",
