@@ -17,7 +17,7 @@ angular.module(
   }
   );
 
-  //$urlRouterProvider.otherwise('objects');
+  $urlRouterProvider.otherwise('/ones');
 }]
 ).controller(
 'mainController', function($scope) {

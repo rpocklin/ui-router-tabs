@@ -30,17 +30,13 @@ afterEach(function() {
 
 describe('Directive : UI Router : Tabs', function() {
 
-  var root_scope, isolate_scope, scope, directive_scope, view, element, state, spy;
+  var root_scope, isolate_scope, scope, directive_scope, view, element, state, sandbox, spy;
   var createView, get_current_state, get_current_params;
   var $ngView;
   var params = {};
   var timeout;
 
-  beforeEach(inject(function($rootScope, $state, $templateCache, $timeout) {
-
-    $templateCache.put('template.html', '');
-
-    timeout = $timeout;
+  beforeEach(inject(function($rootScope, $state, $templateCache) {
 
     createView = function(html, scope) {
       element = angular.element(view);
@@ -68,43 +64,48 @@ describe('Directive : UI Router : Tabs', function() {
       return state.params;
     };
 
-    scope.tabConfiguration = [
-      {
-        heading: 'Heading 1A',
-        route: 'menu.route1'
-      },
-      {
-        heading: 'Heading 1B',
-        route: 'menu.route1',
-        params: {
-          a: 5
-        }
-      },
-      {
-        heading: 'Heading 2',
-        route: 'menu.route2',
-        params: params
+    scope.tabConfiguration = [{
+      heading: 'Heading 1A',
+      route: 'menu.route1'
+        }, {
+      heading: 'Heading 1B',
+      route: 'menu.route1',
+      params: {
+        a: 5
       }
-    ];
+        }, {
+      heading: 'Heading 2',
+      route: 'menu.route2',
+      params: params
+        }];
 
     view = '<tabs data="tabConfiguration" type="pills"></tabs>';
+    sandbox = this.sandbox;
+  }));
+
+  var renderView = function() {
     $ngView = createView(view, scope);
 
     isolate_scope = $ngView.isolateScope();
-    spy = this.sandbox.spy(state, 'go');
-  }));
+    spy = sandbox.spy(state, 'go');
+  };
 
   it('should define the tabs directive with isolated scope', function() {
+    renderView();
     expect(directive_scope).toBeDefined();
   });
 
   it('should throw an error if no data attribute was specified', function() {
+    renderView();
+
     expect(function() {
       createView('<tabs></tabs>', scope);
     }).toThrow('UI Router Tabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
   });
 
   it('should throw an error if no data attributes is not an array', function() {
+    renderView();
+
     expect(function() {
       scope.tabConfiguration = {};
       createView('<tabs data="tabConfiguration"></tabs>', scope);
@@ -112,6 +113,8 @@ describe('Directive : UI Router : Tabs', function() {
   });
 
   it('should initialise the tab configuration correctly when defined', function() {
+    renderView();
+
     expect(scope.tabConfiguration).toBeDefined();
     expect(directive_scope.tabs).toBeDefined();
 
@@ -120,14 +123,35 @@ describe('Directive : UI Router : Tabs', function() {
   });
 
   it('should route to the first entry in tabConfiguration array by default', function() {
+    renderView();
     expect(get_current_state()).toEqual(scope.tabConfiguration[0].route);
   });
 
+  it('should not route to the first entry in tabConfiguration array if auto-select-default-tab is disabled', function() {
+    view = '<tabs data="tabConfiguration" auto-select-default-tab="false"></tabs>';
+    renderView();
+
+    expect(get_current_state()).not.toEqual(scope.tabConfiguration[0].route);
+  });
+
+  it('should route to the correct entry in tabConfiguration array if auto-select-default-tab is disabled', function() {
+    view = '<tabs data="tabConfiguration" auto-select-default-tab="false"></tabs>';
+    renderView();
+
+    var route = scope.tabConfiguration[2].route;
+    state.go(route);
+
+    scope.$apply();
+
+    expect(get_current_state()).toEqual(route);
+  });
+
   it('should not change the route when selecting the current tab', function() {
+    renderView();
 
     $ngView.find('a').eq(0).click();
 
-    timeout.flush();
+    scope.$apply();
     spy.reset();
 
     var previous_state = get_current_state();
@@ -139,11 +163,12 @@ describe('Directive : UI Router : Tabs', function() {
   });
 
   it('should change the route and update the tabs when selecting a different tab', function() {
+    renderView();
 
     var previous_state = get_current_state();
 
     $ngView.find('a').eq(2).click();
-    timeout.flush();
+    scope.$apply();
 
     expect(get_current_state()).not.toEqual(previous_state);
   });

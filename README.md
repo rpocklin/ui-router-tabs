@@ -71,6 +71,8 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 * You can use `<tab-heading>` in a custom directive template to add any HTML into the tab title.
 * You can update the `tabData` variable dynamically, if you want to.
 * You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.)
+* If you are using the `<tabs>` in your root route (ie. in `index.html` directly) you can turn off auto-selecting the default tab (since UI Router can't determine the initial state), use by setting `auto-select-default-tab="false"` (true by default).  If you do this though, it won't auto-navigate to the first tab route initially - to achieve this put the url of the first route in `$urlRouterProvider.otherwise(...)` under the `config` function of your app.
+
 
 
 ## Running Locally
@@ -93,6 +95,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.3.1 Adding `auto-select-default-tab` option and updated jsbeautifier.  See [#16](/../../pull/16).
 * 1.3.0 Improve state equality checking to include params and options.
 * 1.2.0 Preventing reload of current state again.  See [#11](/../../pull/11).
 * 1.1.4 Added support for `strict-di` mode.

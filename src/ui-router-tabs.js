@@ -24,7 +24,7 @@
 
 angular.module('ui.router.tabs', []);
 angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
-  function($rootScope, $state) {
+    function($rootScope, $state) {
 
     return {
       restrict: 'E',
@@ -32,6 +32,7 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
         tabs: '=data',
         type: '@',
         justified: '@',
+        autoSelectDefaultTab: '@?',
         vertical: '@'
       },
       link: function(scope) {
@@ -44,7 +45,7 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
         scope.$on('$destroy', unbindStateChangeSuccess);
       },
       controller: ['$scope',
-        function($scope) {
+                function($scope) {
 
           if (!$scope.tabs) {
             throw new Error('UI Router Tabs: \'data\' attribute not defined, please check documentation for how to use this directive.');
@@ -52,6 +53,14 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
 
           if (!angular.isArray($scope.tabs)) {
             throw new Error('UI Router Tabs: \'data\' attribute must be an array of tab data with at least one tab defined.');
+          }
+
+          // default to true or parse string
+          if (angular.isUndefined($scope.autoSelectDefaultTab)) {
+            $scope.autoSelectDefaultTab = true;
+          }
+          else {
+            $scope.autoSelectDefaultTab = ($scope.autoSelectDefaultTab.toLowerCase() === 'true');
           }
 
           var currentStateEqualTo = function(route, params, options) {
@@ -81,27 +90,33 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
               tab.options = tab.options || {};
               tab.active = $scope.active(tab);
 
-              if (tab.active) {
+              if (currentStateEqualTo(tab.route, tab.params, tab.options)) {
                 $scope.current_tab = tab;
               }
             });
           };
 
           // initialise tabs when creating the directive
-          $scope.update_tabs();
+          if ($scope.autoSelectDefaultTab === true) {
 
-          // if none are active, set the default
-          if (!$scope.current_tab) {
-            $scope.current_tab = $scope.tabs[0];
-            $scope.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
+            $scope.update_tabs();
+
+            // if none are active, set the default as the first tab
+            if (!$scope.current_tab) {
+              $scope.current_tab = $scope.tabs[0];
+              $scope.go($scope.current_tab.route, $scope.current_tab.params, $scope.current_tab.options);
+            }
           }
-    }],
+
+                }
+            ],
       templateUrl: function(element, attributes) {
         return attributes.templateUrl || 'ui-router-tabs-default-template.html';
       }
     };
-}]).run(['$templateCache',
-  function($templateCache) {
+    }
+]).run(['$templateCache',
+    function($templateCache) {
     var DEFAULT_TEMPLATE = '<div>' +
       '<tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
       '  <tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ng-click="go(tab.route, tab.params, tab.options)">' +
@@ -110,4 +125,5 @@ angular.module('ui.router.tabs').directive('tabs', ['$rootScope', '$state',
       '</div>';
 
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
-  }]);
+    }
+]);
