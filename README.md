@@ -95,9 +95,9 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
-* 1.3.1 Adding `auto-select-default-tab` option and updated jsbeautifier.  See [#16](/../../pull/16).
-* 1.3.0 Improve state equality checking to include params and options.
-* 1.2.0 Preventing reload of current state again.  See [#11](/../../pull/11).
+* 1.3.1 Added `auto-select-default-tab` option and updated jsbeautifier.  See [#16](/../../pull/16).
+* 1.3.0 Improved state equality checking to include params and options.
+* 1.2.0 Prevented reload of current state again.  See [#11](/../../pull/11).
 * 1.1.4 Added support for `strict-di` mode.
 * 1.1.3 Fixed tab switching when using `ngTouch`.  See [#2](/../../issues/2).
 * 1.1.2 Added `$stateChangeSuccess` watcher to update parent tab(s) when using <br/>`ui-sref` or `$state.go()`.  See [#1](/../../issues/1).
