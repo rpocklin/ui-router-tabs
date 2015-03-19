@@ -122,20 +122,8 @@ describe('Directive : UI Router : Tabs', function() {
     expect(directive_scope.type).toEqual('pills');
   });
 
-  it('should route to the first entry in tabConfiguration array by default', function() {
-    renderView();
-    expect(get_current_state()).toEqual(scope.tabConfiguration[0].route);
-  });
-
-  it('should not route to the first entry in tabConfiguration array if auto-select-default-tab is disabled', function() {
-    view = '<tabs data="tabConfiguration" auto-select-default-tab="false"></tabs>';
-    renderView();
-
-    expect(get_current_state()).not.toEqual(scope.tabConfiguration[0].route);
-  });
-
-  it('should route to the correct entry in tabConfiguration array if auto-select-default-tab is disabled', function() {
-    view = '<tabs data="tabConfiguration" auto-select-default-tab="false"></tabs>';
+  it('should route to the correct entry in tabConfiguration array', function() {
+    view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
 
     var route = scope.tabConfiguration[2].route;
