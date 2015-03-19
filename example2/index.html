@@ -7,9 +7,25 @@
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
 </head>
 
-<body ng-app="example" ng-strict-di>
+<body ng-app="example">
 
-<div ui-view></div>
+<div class="row" ng-controller="mainController">
+  <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-12">
+        <tabs data="tabs" type="pills" justified="true" template-url="tabs-template.html"
+              auto-select-default-tab="false"></tabs>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
@@ -19,8 +35,6 @@
 <script src="../src/ui-router-tabs.js"></script>
 
 <script src="app.js"></script>
-<script src="example-controller.js"></script>
-<script src="user/settings/settings-controller.js"></script>
 
 </body>
 </html>
