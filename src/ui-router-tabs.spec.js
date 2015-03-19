@@ -66,17 +66,17 @@ describe('Directive : UI Router : Tabs', function() {
     scope.tabConfiguration = [{
       heading: 'Heading 1A',
       route: 'menu.route1'
-        }, {
+    }, {
       heading: 'Heading 1B',
       route: 'menu.route1',
       params: {
         a: 5
       }
-        }, {
+    }, {
       heading: 'Heading 2',
       route: 'menu.route2',
       params: params
-        }];
+    }];
 
     view = '<tabs data="tabConfiguration" type="pills"></tabs>';
     sandbox = this.sandbox;
