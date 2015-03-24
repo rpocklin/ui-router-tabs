@@ -34,7 +34,6 @@ describe('Directive : UI Router : Tabs', function() {
   var createView, get_current_state, get_current_params;
   var $ngView;
   var params = {};
-  var timeout;
 
   beforeEach(inject(function($rootScope, $state, $templateCache) {
 
@@ -134,6 +133,22 @@ describe('Directive : UI Router : Tabs', function() {
     expect(get_current_state()).toEqual(route);
   });
 
+  it('should not change the route if a $stateChangeStart handler cancels the route change', function() {
+    view = '<tabs data="tabConfiguration"></tabs>';
+    renderView();
+
+    var route = scope.tabConfiguration[2].route;
+
+    root_scope.$on('$stateChangeStart', function(event) {
+      event.preventDefault();
+    });
+
+    state.go(route);
+    scope.$apply();
+
+    expect(get_current_state()).not.toEqual(route);
+  });
+
   it('should not change the route when selecting the current tab', function() {
     renderView();
 
@@ -145,6 +160,26 @@ describe('Directive : UI Router : Tabs', function() {
     var previous_state = get_current_state();
 
     $ngView.find('a').eq(0).click();
+    scope.$apply();
+
+    expect(get_current_state()).toEqual(previous_state);
+    expect(spy.notCalled).toBeTruthy();
+  });
+
+  it('should not change the route when the clicked tab is disabled', function() {
+
+    renderView();
+
+    $ngView.find('a').eq(2).click();
+
+    scope.$apply();
+    spy.reset();
+
+    var previous_state = get_current_state();
+
+    scope.tabConfiguration[0].disabled = true;
+    $ngView.find('a').eq(0).click();
+    scope.$apply();
 
     expect(get_current_state()).toEqual(previous_state);
     expect(spy.notCalled).toBeTruthy();

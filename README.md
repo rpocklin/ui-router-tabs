@@ -37,7 +37,8 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
         },
         {
           heading: 'Accounts',
-          route:   'user.accounts'
+          route:   'user.accounts',
+          disabled: true
         }
       ];
   ```
@@ -67,8 +68,11 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 ## Tips
 
+* UI Bootstrap Tabs will always select one tab by default.  There is a fix in `master` for `ui-bootstrap` so this
+  should be fixed by upgrading when a new version of this is released.  See [#ui-bootstrap-commit](https://github.com/angular-ui/bootstrap/commit/91b5fb62eedbb600d6a6abe32376846f327a903d)
 * You should link to the `ui-view` containing the tabs with the default (first) element as the sub-route (ie. `example/#/user/settings` in the example).
 * You can override the default directive template by specifying `template-url="my_template.html"` on the `<tabs>` element.
+* You can enable / disable tabs by specifying `disabled: true` in the `tabData` (can be dynamically set).
 * You can use `<tab-heading>` in a custom directive template to add any HTML into the tab title.
 * You can update the `tabData` variable dynamically, if you want to.
 * You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.)
@@ -95,7 +99,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
-* 1.4.0 Removed default `$state.go(..)` route option and updated jsbeautifier.  See [#16](/../../pull/16).
+* 1.4.0 Removed default `$state.go(..)` route option, added `disabled` option and updated jsbeautifier.  See [#16](/../../pull/16).
 * 1.3.0 Improved state equality checking to include params and options.
 * 1.2.0 Prevented reload of current state again.  See [#11](/../../pull/11).
 * 1.1.4 Added support for `strict-di` mode.
