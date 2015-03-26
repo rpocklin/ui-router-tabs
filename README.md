@@ -99,6 +99,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.4.1 Bumped angular-bootstrap dependency to v0.12.1.
 * 1.4.0 Removed default `$state.go(..)` route option, added `disabled` option and updated jsbeautifier.  See [#16](/../../pull/16).
 * 1.3.0 Improved state equality checking to include params and options.
 * 1.2.0 Prevented reload of current state again.  See [#11](/../../pull/11).

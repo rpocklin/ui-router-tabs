@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "angular": "^1.2.26",
-    "angular-bootstrap": "^0.11.2",
+    "angular-bootstrap": "^0.12.1",
     "angular-ui-router": "^0.2.11"
   },
   "devDependencies": {
