@@ -64,7 +64,17 @@ angular.module('ui.router.tabs').directive(
         $scope.go = function(tab) {
 
           if (!currentStateEqualTo(tab) && !tab.disabled) {
-            $state.go(tab.route, tab.params, tab.options);
+            var promise = $state.go(tab.route, tab.params, tab.options);
+
+            /* until the $stateChangeCancel event is released in ui-router, will use this to update
+               tabs if the $stateChangeEvent is cancelled before it finishes loading the state, see
+               https://github.com/rpocklin/ui-router-tabs/issues/19 and
+               https://github.com/angular-ui/ui-router/pull/1090 for further information
+
+               $stateChangeCancel is better since it will handle ui-sref and external $state.go(..) calls */
+            promise.catch(function() {
+              $scope.update_tabs();
+            });
           }
         };
 

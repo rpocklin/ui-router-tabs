@@ -149,6 +149,24 @@ describe('Directive : UI Router : Tabs', function() {
     expect(get_current_state()).not.toEqual(route);
   });
 
+  it('should reset the active tab heading if a $stateChangeStart handler cancels the route change', function() {
+    view = '<tabs data="tabConfiguration"></tabs>';
+    renderView();
+
+    var route = scope.tabConfiguration[2].route;
+
+    root_scope.$on('$stateChangeStart', function(event) {
+      event.preventDefault();
+    });
+
+    state.go(route);
+    scope.$apply();
+
+    expect(get_current_state()).not.toEqual(route);
+    expect($ngView.find('.nav li').eq(2).attr('class')).not.toMatch('active');
+    expect($ngView.find('.nav li').eq(0).attr('class')).toMatch('active');
+  });
+
   it('should not change the route when selecting the current tab', function() {
     renderView();
 
