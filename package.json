@@ -1,6 +1,17 @@
 {
   "name": "angular-ui-router-tabs",
-  "version": "1.0.0",
+  "description":  "Idiot-proof tab panes with route support using Angular.js + Bootstrap 3 + UI Router.",
+  "homepage":"https://github.com/rpocklin/angular-timeline",
+  "author":"Robert Pocklington <rpocklin@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/rpocklin/angular-timeline"
+  },
+  "keywords": [
+    "angular", "tabs", "navigation", "ui-router", "bootstrap"
+  ],
+  "version": "1.4.2",
+  "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.7.3",
