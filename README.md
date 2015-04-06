@@ -3,7 +3,10 @@
 Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router](https://github.com/angular-ui/ui-router) to give you full-strength route-driven tabs in Angular.js.
 
 [![Build Status](https://secure.travis-ci.org/rpocklin/ui-router-tabs.svg)](http:/travis-ci.org/rpocklin/ui-router-tabs)
-[![Coverage Status](https://coveralls.io/repos/rpocklin/ui-router-tabs/badge.png)](https://coveralls.io/r/rpocklin/ui-router-tabs)
+[![Coverage Status](https://coveralls.io/repos/rpocklin/ui-router-tabs/badge.svg)](https://coveralls.io/r/rpocklin/ui-router-tabs)
+&nbsp;&nbsp;&nbsp;
+[![Gratipay](https://img.shields.io/gratipay/rpocklin.svg)](https://gratipay.com/rpocklin/)
+
 
 ## Example / Demo
 [Link](http://rpocklin.github.io/ui-router-tabs/example/index.html)
@@ -75,8 +78,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 * You can enable / disable tabs by specifying `disabled: true` in the `tabData` (can be dynamically set).
 * You can use `<tab-heading>` in a custom directive template to add any HTML into the tab title.
 * You can update the `tabData` variable dynamically, if you want to.
-* You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.)
-
+* You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.).
 
 
 ## Running Locally
@@ -99,6 +101,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.4.2 Added feature to update tabs if state change event is cancelled.  See [#19](/../../pull/19).
 * 1.4.1 Bumped angular-bootstrap dependency to v0.12.1.
 * 1.4.0 Removed default `$state.go(..)` route option, added `disabled` option and updated jsbeautifier.  See [#16](/../../pull/16).
 * 1.3.0 Improved state equality checking to include params and options.

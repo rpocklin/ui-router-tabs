@@ -6,16 +6,11 @@
  * requires 'ui.router' and 'ui.bootstrap'
  * (uses tabset and tab directives in ui.bootstrap and route changes in ui.router)
  *
- * NOTE: suggest to load any common model in the parent controller.resolve
- * and you don't have to make the parent view abstract - it will default to the first tab.
- *
- * If you don't want this, link to the page via your desired tab child state directly.
- *
  * You can define (for styling) the attributes type="pills" and vertical="true | false" and justified="true | false"
  *
- * Uses a $rootScope watcher to explicitly update the parent tab(s) when using $state.go or ui-sref anchors.
+ * Watches the $stateChangeXX events so it can update the parent tab(s) when using $state.go or ui-sref anchors.
  *
- * See ui-router-tabs.spec.js for usage examples.
+ * See ui-router-tabs.spec.js for tests.
  *
  * Author: Robert Pocklington (rpocklin@gmail.com)
  * License: MIT
@@ -69,7 +64,8 @@ angular.module('ui.router.tabs').directive(
             /* until the $stateChangeCancel event is released in ui-router, will use this to update
                tabs if the $stateChangeEvent is cancelled before it finishes loading the state, see
                https://github.com/rpocklin/ui-router-tabs/issues/19 and
-               https://github.com/angular-ui/ui-router/pull/1090 for further information
+               https://github.com/angular-ui/ui-router/pull/1090 for further information and
+               https://github.com/angular-ui/ui-router/pull/1844
 
                $stateChangeCancel is better since it will handle ui-sref and external $state.go(..) calls */
             promise.catch(function() {
