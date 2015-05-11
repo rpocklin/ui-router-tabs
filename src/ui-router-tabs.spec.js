@@ -1,5 +1,15 @@
 'use strict';
 
+var forceResolveFailure = false;
+
+var loadData = function() {
+  if (forceResolveFailure) {
+    throw new Error();
+  }
+
+  return [];
+};
+
 beforeEach(function() {
 
   module('ui.router.tabs');
@@ -9,19 +19,32 @@ beforeEach(function() {
   module(function($stateProvider) {
     $stateProvider
       .state('menu', {
-        url: '/menu'
+        url: '/menu',
+        resolve: {
+          data: loadData
+        }
       })
       .state('menu.route1', {
-        url: '/route1'
+        url: '/route1',
+        resolve: {
+          data: loadData
+        }
       }).state('menu.route2', {
-        url: '/route2'
+        url: '/route2',
+        resolve: {
+          data: loadData
+        }
       })
       .state('notabs', {
-        url: '/notabs'
+        url: '/notabs',
+        resolve: {
+          data: loadData
+        }
       });
   });
 
   this.sandbox = sinon.sandbox.create();
+  forceResolveFailure = false;
 });
 
 afterEach(function() {
@@ -125,46 +148,109 @@ describe('Directive : UI Router : Tabs', function() {
     view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
 
-    var route = scope.tabConfiguration[2].route;
+    var tabIndex = 2;
+    var route = scope.tabConfiguration[tabIndex].route;
     state.go(route);
 
     scope.$apply();
 
     expect(get_current_state()).toEqual(route);
+    expect($ngView.find('.nav li').eq(tabIndex).attr('class')).toMatch('active');
   });
 
-  it('should not change the route if a $stateChangeStart handler cancels the route change', function() {
+  it('should change the route and update the tabs when selecting a different tab', function() {
+    renderView();
+
+    var previous_state = get_current_state();
+
+    $ngView.find('a').eq(2).click();
+    scope.$apply();
+
+    expect(get_current_state()).not.toEqual(previous_state);
+  });
+
+  it('should not change the route or active tab heading if a $stateChangeStart handler cancels the route change', function() {
+
     view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
 
-    var route = scope.tabConfiguration[2].route;
+    var initialTabIndex = 0;
+    var initialRoute = scope.tabConfiguration[initialTabIndex].route;
+    state.go(initialRoute);
+
+    scope.$apply();
 
     root_scope.$on('$stateChangeStart', function(event) {
       event.preventDefault();
     });
 
-    state.go(route);
+    var targetTabIndex = 2;
+    var targetRoute = scope.tabConfiguration[targetTabIndex].route;
+
+    state.go(targetRoute);
     scope.$apply();
 
-    expect(get_current_state()).not.toEqual(route);
+    expect(get_current_state()).not.toEqual(targetRoute);
+    expect($ngView.find('.nav li').eq(targetTabIndex).attr('class')).not.toMatch('active');
+
+    expect(get_current_state()).toEqual(initialRoute);
+    expect($ngView.find('.nav li').eq(initialTabIndex).attr('class')).toMatch('active');
   });
 
-  it('should reset the active tab heading if a $stateChangeStart handler cancels the route change', function() {
+  it('should not change the route or active tab heading if a $stateChangeError event triggers during the route change', function() {
+
     view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
 
-    var route = scope.tabConfiguration[2].route;
+    var initialTabIndex = 0;
+    var initialRoute = scope.tabConfiguration[initialTabIndex].route;
+    state.go(initialRoute);
 
-    root_scope.$on('$stateChangeStart', function(event) {
-      event.preventDefault();
-    });
-
-    state.go(route);
     scope.$apply();
 
-    expect(get_current_state()).not.toEqual(route);
-    expect($ngView.find('.nav li').eq(2).attr('class')).not.toMatch('active');
-    expect($ngView.find('.nav li').eq(0).attr('class')).toMatch('active');
+    forceResolveFailure = true;
+
+    var targetTabIndex = 2;
+    var targetRoute = scope.tabConfiguration[targetTabIndex].route;
+
+    state.go(targetRoute);
+    scope.$apply();
+
+    expect(get_current_state()).not.toEqual(targetRoute);
+    expect($ngView.find('.nav li').eq(targetTabIndex).attr('class')).not.toMatch('active');
+
+    expect(get_current_state()).toEqual(initialRoute);
+    expect($ngView.find('.nav li').eq(initialTabIndex).attr('class')).toMatch('active');
+  });
+
+  it('should not change the route or active tab heading if a $stateNotFound event triggers during the route change', function() {
+
+    view = '<tabs data="tabConfiguration"></tabs>';
+    renderView();
+
+    var initialTabIndex = 0;
+    var initialRoute = scope.tabConfiguration[initialTabIndex].route;
+    state.go(initialRoute);
+
+    scope.$apply();
+
+    forceResolveFailure = true;
+
+    var targetTabIndex = 2;
+    var targetRoute = 'some.invalid.route';
+
+    try {
+      state.go(targetRoute);
+    }
+    catch (error) { /* do nothing */ }
+
+    scope.$apply();
+
+    expect(get_current_state()).not.toEqual(targetRoute);
+    expect($ngView.find('.nav li').eq(targetTabIndex).attr('class')).not.toMatch('active');
+
+    expect(get_current_state()).toEqual(initialRoute);
+    expect($ngView.find('.nav li').eq(initialTabIndex).attr('class')).toMatch('active');
   });
 
   it('should not change the route when selecting the current tab', function() {
@@ -201,16 +287,5 @@ describe('Directive : UI Router : Tabs', function() {
 
     expect(get_current_state()).toEqual(previous_state);
     expect(spy.notCalled).toBeTruthy();
-  });
-
-  it('should change the route and update the tabs when selecting a different tab', function() {
-    renderView();
-
-    var previous_state = get_current_state();
-
-    $ngView.find('a').eq(2).click();
-    scope.$apply();
-
-    expect(get_current_state()).not.toEqual(previous_state);
   });
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-var SettingsCtrl = ['$rootScope', '$scope', '$stateParams', function($rootScope, $scope, $stateParams) {
+var SettingsCtrl = ['$rootScope', '$scope', '$stateParams', function($rootScope, $scope) {
 
   $scope.initialise = function() {
 
