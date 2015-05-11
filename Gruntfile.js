@@ -2,6 +2,8 @@
 
 module.exports = function(grunt) {
 
+  var beautifyFiles = ['!Gruntfile.js', '!npm-shrinkwrap.json', 'src/**/*.{html,js}', '!app/bower_components/**/*'];
+
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -29,15 +31,24 @@ module.exports = function(grunt) {
 
     // verifies we have formatted our js and HTML according to our style conventions
     jsbeautifier: {
-      files:   ['!Gruntfile.js', '!npm-shrinkwrap.json', 'src/**/*.{html,js}', '!app/bower_components/**/*'],
-      options: {
-        config: '.jsbeautifyrc',
-        mode: 'VERIFY_ONLY'
+      verify : {
+        src:   beautifyFiles,
+        options: {
+          config: '.jsbeautifyrc',
+          mode: 'VERIFY_ONLY'
+        }
+      },
+      update: {
+        src:   beautifyFiles,
+        options: {
+          config: '.jsbeautifyrc'
+        }
       }
+
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint:       {
+    jshint: {
       options: {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
@@ -46,7 +57,7 @@ module.exports = function(grunt) {
     },
 
     // Test settings
-    karma:        {
+    karma: {
       unit: {
         options:    {
           logLevel: 'DEBUG'
@@ -69,7 +80,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('serve', ['connect', 'watch']);
+  grunt.registerTask('beautify', ['jsbeautifier:update']);
   grunt.registerTask('default', [
-    'jsbeautifier', 'jshint', 'karma', 'coveralls'
+    'jsbeautifier:verify', 'jshint', 'karma', 'coveralls'
   ]);
 };
