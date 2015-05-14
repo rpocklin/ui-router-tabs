@@ -71,9 +71,8 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 ## Tips
 
-* UI Bootstrap Tabs will always select one tab by default.  There is a fix in `master` for `ui-bootstrap` so this
-  should be fixed by upgrading when a new version of this is released.  See [#ui-bootstrap-commit](https://github.com/angular-ui/bootstrap/commit/91b5fb62eedbb600d6a6abe32376846f327a903d)
-* You should link to the `ui-view` containing the tabs with the default (first) element as the sub-route (ie. `example/#/user/settings` in the example).
+* UI Bootstrap Tabs will not select a tab by default.  If you want it to, specify the target sub-route when you
+  show the tabs (ie. link the `ui-view` containing the tabs with the default (first) element as the sub-route `example/#/user/settings` in the example.)
 * You can override the default directive template by specifying `template-url="my_template.html"` on the `<tabs>` element.
 * You can enable / disable tabs by specifying `disabled: true` in the `tabData` (can be dynamically set).
 * You can use `<tab-heading>` in a custom directive template to add any HTML into the tab title.

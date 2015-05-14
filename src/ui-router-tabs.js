@@ -98,7 +98,7 @@ angular.module('ui.router.tabs').directive(
 ['$templateCache', function($templateCache) {
     var DEFAULT_TEMPLATE = '<div><tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
       'justified="{{justified}}">' + '<tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-      'active="tab.active" disabled="tab.disabled" ng-click="go(tab)">' +
+      'active="tab.active" disable="tab.disabled" ng-click="go(tab)">' +
       '</tab></tabset></div>';
 
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
