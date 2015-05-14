@@ -100,6 +100,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.5.0 Bumped `angular-bootstrap` dependency to v0.13.0 (fixes default tab being auto-selected).
 * 1.4.3 Added handling of `$stateChangeCancel`, `$stateChangeError` and `$stateNotFound` to reset active tab.
 * 1.4.2 Added feature to update tabs if state change event is cancelled.  See [#19](/../../pull/19).
 * 1.4.1 Bumped angular-bootstrap dependency to v0.12.1.
