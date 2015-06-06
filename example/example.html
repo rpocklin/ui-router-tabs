@@ -1,14 +1,14 @@
-<div class="inner-wrapper">
+<div role="tabpanel" class="col-xs-12">
+	<tabs data="tabData" type="tabs" />
+	<form class="form-horizontal" name="editForm" novalidate>
+		<div class="tab-content col-xs-7">
+			<div ui-view></div>
 
-	<h1>User Details</h1>
+			<br />
 
-	<div class="row">
-		<div class="col-md-2">
-			<tabs data="tabData" type="pills"></tabs>
+			<div class="col-xs-7">
+				<button class="btn btn-primary pull-right" type="submit">Artikelgegevens aanpassen</button>
+			</div>
 		</div>
-
-		<div class="col-md-10">
-			<ui-view autoscroll></ui-view>
-		</div>
-	</div>
+	</form>
 </div>

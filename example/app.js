@@ -7,22 +7,32 @@ var app = angular.module('example', [
 ]);
 
 app.config(['$stateProvider', function($stateProvider) {
-  $stateProvider.state('user', {
-    url:         '',
-    controller: 'ExampleCtrl',
-    templateUrl: 'example.html'
-  }).state('user.accounts', {
-    url:         '/user/accounts',
-    templateUrl: 'user/accounts.html'
-  }).state('user.settings', {
-    url:         '/user/settings',
-    controller: 'SettingsCtrl',
-    templateUrl: 'user/settings/settings.html'
-  }).state('user.settings.one', {
-    url:         '/one',
-    template: '<div>Settings nested route 1</div>'
-  }).state('user.settings.two', {
-    url:         '/two',
-    template: '<div>Settings nested route 2</div>'
+  $stateProvider.state(
+  'articledetail', {
+    url: '', templateUrl: 'example.html',
+    controller: 'ArticleDetailController'
+  }),
+  $stateProvider.state(
+  'articledetail.tab1', {
+    url: '/tab1', templateUrl: '/articledetail/tab1.html'
+  }
+  ).state(
+  'articledetail.tab2', {
+    url: '/tab2', templateUrl: '/articledetail/tab2.html'
+  }
+  ).state(
+  'articledetail.tab3', {
+    url: '/tab3', templateUrl: '/articledetail/tab3.html'
+  }
+  ).state(
+  'articledetail.tab4', {
+    url: '/tab4', templateUrl: '/articledetail/tab4.html'
+  }
+  ).state(
+  'error', {
+    url: '/error', templateUrl: '/error/error.html'
   });
+
 }]);
+
+
