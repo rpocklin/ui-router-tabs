@@ -3,6 +3,7 @@
   "description":  "Idiot-proof tab panes with route support using Angular.js + Bootstrap 3 + UI Router.",
   "homepage":"https://github.com/rpocklin/angular-timeline",
   "author":"Robert Pocklington <rpocklin@gmail.com>",
+  "main": "src/ui-router-tabs.js",
   "repository": {
     "type": "git",
     "url": "http://github.com/rpocklin/angular-timeline"
