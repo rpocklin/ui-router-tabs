@@ -100,6 +100,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.5.1 Removed `bower_components` from repository.  See [#40](/../../pull/40).
 * 1.5.0 Bumped `angular-bootstrap` dependency to v0.13.0 (fixes default tab being auto-selected).
 * 1.4.3 Added handling of `$stateChangeCancel`, `$stateChangeError` and `$stateNotFound` to reset active tab.
 * 1.4.2 Added feature to update tabs if state change event is cancelled.  See [#19](/../../pull/19).
@@ -112,7 +113,6 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 * 1.1.2 Added `$stateChangeSuccess` watcher to update parent tab(s) when using <br/>`ui-sref` or `$state.go()`.  See [#1](/../../issues/1).
 * 1.1.0 Added nested tab support (tabs within tabs)
 * 1.0.0 Initial release
-
 
 ## License
 
