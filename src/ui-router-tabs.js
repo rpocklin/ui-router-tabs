@@ -17,6 +17,11 @@
  *
  */
 
+// Common.js package manager support (e.g. ComponentJS, WebPack)
+if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
+  module.exports = 'ui.router.tabs';
+}
+
 angular.module('ui.router.tabs', []);
 angular.module('ui.router.tabs').directive(
   'tabs', ['$rootScope', '$state', function($rootScope, $state) {
