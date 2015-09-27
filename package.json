@@ -6,7 +6,7 @@
   "main": "src/ui-router-tabs.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/rpocklin/ui-router-tabs"
+    "url": "http://github.com/rpocklin/ui-router-tabs.git"
   },
   "keywords": [
     "angular", "tabs", "navigation", "ui-router", "bootstrap"
@@ -38,9 +38,5 @@
   },
   "scripts": {
     "test": "grunt karma"
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/npm/npm.git"
   }
 }
