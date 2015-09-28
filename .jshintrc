@@ -23,6 +23,8 @@
     "jQuery":   false,
     "Backbone": false,
     "_":        false,
-    "document": false
+    "document": false,
+    "module": false,
+    "exports": false
   }
 }
