@@ -68,7 +68,7 @@ angular.module('ui.router.tabs').directive(
 
         $scope.go = function(tab) {
 
-          if (!currentStateEqualTo(tab) && !tab.disabled) {
+          if (!currentStateEqualTo(tab) && !tab.disable) {
             $state.go(tab.route, tab.params, tab.options);
           }
         };
@@ -103,7 +103,7 @@ angular.module('ui.router.tabs').directive(
 ['$templateCache', function($templateCache) {
     var DEFAULT_TEMPLATE = '<div><tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
       'justified="{{justified}}">' + '<tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-      'active="tab.active" disable="tab.disabled" ng-click="go(tab)">' +
+      'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
       '</tab></tabset></div>';
 
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);

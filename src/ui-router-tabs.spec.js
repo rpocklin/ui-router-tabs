@@ -281,7 +281,7 @@ describe('Directive : UI Router : Tabs', function() {
 
     var previous_state = get_current_state();
 
-    scope.tabConfiguration[0].disabled = true;
+    scope.tabConfiguration[0].disable = true;
     $ngView.find('a').eq(0).click();
     scope.$apply();
 
