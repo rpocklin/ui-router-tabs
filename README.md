@@ -100,6 +100,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.6.0 Renamed `disabled` attribute to `disable` in line with UI Bootstrap `<tab>`.  See [#39](/../../issues/39).
 * 1.5.1 Removed `bower_components` from repository.  See [#40](/../../pull/40).
 * 1.5.0 Bumped `angular-bootstrap` dependency to v0.13.0 (fixes default tab being auto-selected).
 * 1.4.3 Added handling of `$stateChangeCancel`, `$stateChangeError` and `$stateNotFound` to reset active tab.
