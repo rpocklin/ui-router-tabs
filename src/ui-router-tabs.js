@@ -17,7 +17,7 @@
  *
  */
 
-// Common.js package manager support (e.g. ComponentJS, WebPack)
+/* Common.js package manager support (e.g. ComponentJS, WebPack) */
 if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
   module.exports = 'ui.router.tabs';
 }
@@ -90,8 +90,6 @@ angular.module('ui.router.tabs').directive(
           });
         };
 
-        // this always selects the first tab currently - fixed in ui-bootstrap master but not yet released
-        // see https://github.com/angular-ui/bootstrap/commit/91b5fb62eedbb600d6a6abe32376846f327a903d
         $scope.update_tabs();
     }],
       templateUrl: function(element, attributes) {
