@@ -11,7 +11,7 @@
   "keywords": [
     "angular", "tabs", "navigation", "ui-router", "bootstrap"
   ],
-  "version": "1.6.0",
+  "version": "1.7.0",
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.1",
