@@ -101,7 +101,7 @@ describe('Directive : UI Router : Tabs', function() {
       params: params
     }];
 
-    view = '<tabs data="tabConfiguration" type="pills"></tabs>';
+    view = '<tabs data="tabConfiguration" type="pills" tab-classes="someClass"></tabs>';
     sandbox = this.sandbox;
   }));
 
@@ -142,6 +142,7 @@ describe('Directive : UI Router : Tabs', function() {
 
     expect(scope.tabConfiguration).toEqual(directive_scope.tabs);
     expect(directive_scope.type).toEqual('pills');
+    expect(directive_scope.tabClasses).toEqual('someClass');
   });
 
   it('should route to the correct entry in tabConfiguration array', function() {

@@ -66,6 +66,12 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
   * `vertical: boolean`
   * `justified: boolean`
 
+1. Optionally, you can also add arbitrary classes to the tab elements via the "tab-class" attribute  
+
+```html
+  <tabs tab-classes="myCssClass" ... />
+```
+
 1. Define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
 
 
