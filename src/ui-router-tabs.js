@@ -32,7 +32,8 @@ angular.module('ui.router.tabs').directive(
         tabs: '=data',
         type: '@',
         justified: '@',
-        vertical: '@'
+        vertical: '@',
+        withUiView: '@'
       },
       link: function(scope) {
 
@@ -99,10 +100,14 @@ angular.module('ui.router.tabs').directive(
 }]
 ).run(
 ['$templateCache', function($templateCache) {
-    var DEFAULT_TEMPLATE = '<div><uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
-      'justified="{{justified}}">' + '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-      'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
-      '</uib-tab></uib-tabset></div>';
+    var DEFAULT_TEMPLATE =
+      '<div> ' +
+        '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
+          '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
+            '<ui-view ng-if="withUiView" />' +
+          '</uib-tab>' +
+        '</uib-tabset>' +
+      '</div>';
 
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
 }]
