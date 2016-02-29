@@ -102,25 +102,15 @@ angular.module('ui.router.tabs').directive(
 ).run(
 ['$templateCache', function($templateCache) {
 
-    var UI_ROUTER_TABSET_TEMPLATE =
-      '<div>' +
-        '<ul class="nav nav-{{tabset.type || \'tabs\'}}" ng-class="{\'nav-stacked\': vertical, \'nav-justified\': justified}" ng-transclude></ul>' +
-        '<div class="tab-content">' +
-          '<div class="tab-pane active">' +
-            '<div ui-view></div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-
     var DEFAULT_TEMPLATE =
-      '<div> ' +
+      '<div>' +
         '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
           '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
+            '<div ng-if="currentStateEqualTo(tab) && tab.active" ui-view></div>' +
           '</uib-tab>' +
         '</uib-tabset>' +
       '</div>';
 
-    $templateCache.put('template/tabs/tabset.html', UI_ROUTER_TABSET_TEMPLATE);
     $templateCache.put('ui-router-tabs-default-template.html', DEFAULT_TEMPLATE);
 }]
 );
