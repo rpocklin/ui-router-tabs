@@ -81,13 +81,19 @@ angular.module('ui.router.tabs').directive(
         };
 
         $scope.update_tabs = function() {
+          var activeTab = 0;
 
           // sets which tab is active (used for highlighting)
           angular.forEach($scope.tabs, function(tab) {
             tab.params = tab.params || {};
             tab.options = tab.options || {};
             tab.active = $scope.active(tab);
+            if (tab.active) {
+              activeTab = tab.index;
+            }
           });
+
+          $scope.activeTab = activeTab;
         };
 
         $scope.update_tabs();
@@ -99,7 +105,7 @@ angular.module('ui.router.tabs').directive(
 }]
 ).run(
 ['$templateCache', function($templateCache) {
-    var DEFAULT_TEMPLATE = '<div><uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
+    var DEFAULT_TEMPLATE = '<div><uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" active="activeTab"' +
       'justified="{{justified}}">' + '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
       'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
       '</uib-tab></uib-tabset></div>';
