@@ -75,7 +75,9 @@ angular.module('ui.router.tabs').directive(
 
         /* whether to highlight given route as part of the current state */
         $scope.active = function(tab) {
-
+          if (typeof tab.isActive === 'function') {
+            return tab.isActive();
+          }
           var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
           return isAncestorOfCurrentRoute;
         };
