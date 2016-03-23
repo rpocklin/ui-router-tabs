@@ -7,6 +7,7 @@
  * (uses tabset and tab directives in ui.bootstrap and route changes in ui.router)
  *
  * You can define (for styling) the attributes type="pills" and vertical="true | false" and justified="true | false"
+ * You can also specify arbitrary CSS classes to be added to each tab by providing them as values with the "class" parameter
  *
  * Watches the $stateChangeXX events so it can update the parent tab(s) when using $state.go or ui-sref anchors.
  *
@@ -32,7 +33,8 @@ angular.module('ui.router.tabs').directive(
         tabs: '=data',
         type: '@',
         justified: '@',
-        vertical: '@'
+        vertical: '@',
+        class: '@'
       },
       link: function(scope) {
 
@@ -100,7 +102,7 @@ angular.module('ui.router.tabs').directive(
 ).run(
 ['$templateCache', function($templateCache) {
     var CUSTOM_UI_VIEW_TEMPLATE = '<div><uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
-      'justified="{{justified}}">' +
+      'justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
       'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
       '</uib-tab>' +

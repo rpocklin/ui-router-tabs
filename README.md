@@ -65,9 +65,10 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
   * `type: [ 'tabs' | 'pills' ]`
   * `vertical: boolean`
   * `justified: boolean`
+  * `class: string`
+  * `templateUrl: <template url name>`
 
-1. Define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
-
+  NOTE: If you use a customer template, you may need to define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
 
 ## Tips
 
@@ -100,6 +101,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 1.8.0 Added inline template by default (as requested) and allowed customer classes parameter.
 * 1.7.0 Added `uib` prefix for UI Bootstrap elements (as per v0.14.0).    See [#47](/../../pull/47).
 * 1.6.0 Renamed `disabled` attribute to `disable` in line with UI Bootstrap `<tab>`.  See [#39](/../../issues/39).
 * 1.5.1 Removed `bower_components` from repository.  See [#40](/../../pull/40).
