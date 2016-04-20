@@ -101,8 +101,8 @@ angular.module('ui.router.tabs').directive(
 }]
 ).run(
 ['$templateCache', function($templateCache) {
-    var CUSTOM_UI_VIEW_TEMPLATE = '<div><uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" ' +
-      'justified="{{justified}}" class="{{class}}">' +
+    var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
+      '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
       'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
       '</uib-tab>' +
@@ -110,10 +110,11 @@ angular.module('ui.router.tabs').directive(
       '</div>';
 
     var INLINE_TEMPLATE =
-      '<div> ' +
-      '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' + '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}">' +
-      '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
-      '<ui-view ng-if="withUiView" />' +
+      '<div>' +
+      '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
+      '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
+      'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
+      '<ui-view></ui-view>' +
       '</uib-tab>' +
       '</uib-tabset>' +
       '</div>';
