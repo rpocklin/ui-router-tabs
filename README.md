@@ -79,6 +79,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 * You can use `<tab-heading>` in a custom directive template to add any HTML into the tab title.
 * You can update the `tabData` variable dynamically, if you want to.
 * You can move the `<tabs>` tag around to wherever you want the tab listing to appear.  (left-positioned is the best spot to enable responsive design.).
+* Each tab will have a default class of `tab`, an active tab will have the `active` class.
 
 
 ## Running Locally
@@ -101,6 +102,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 2.0.0 Upgraded angular-bootstrap to v14.0, added `class` and `template-url` attributes on `uib-tab` and began using `<uib-tab-heading>` tag.
 * 1.8.0 Added inline template by default (as requested) and allowed customer classes parameter.
 * 1.7.0 Added `uib` prefix for UI Bootstrap elements (as per v0.14.0).    See [#47](/../../pull/47).
 * 1.6.0 Renamed `disabled` attribute to `disable` in line with UI Bootstrap `<tab>`.  See [#39](/../../issues/39).

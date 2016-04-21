@@ -8,6 +8,7 @@
  *
  * You can define (for styling) the attributes type="pills" and vertical="true | false" and justified="true | false"
  * You can also specify arbitrary CSS classes to be added to each tab by providing them as values with the "class" parameter
+ * (for the 'tabs' or 'tab' elements, and the 'template-url' for custom tab rendering.
  *
  * Watches the $stateChangeXX events so it can update the parent tab(s) when using $state.go or ui-sref anchors.
  *
@@ -23,7 +24,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
   module.exports = 'ui.router.tabs';
 }
 
-angular.module('ui.router.tabs', []);
+angular.module('ui.router.tabs', ['ngSanitize']);
 angular.module('ui.router.tabs').directive(
   'tabs', ['$rootScope', '$state', function($rootScope, $state) {
 
@@ -88,6 +89,7 @@ angular.module('ui.router.tabs').directive(
           angular.forEach($scope.tabs, function(tab) {
             tab.params = tab.params || {};
             tab.options = tab.options || {};
+            tab.class = tab.class || '';
             tab.active = $scope.active(tab);
           });
         };
@@ -103,18 +105,19 @@ angular.module('ui.router.tabs').directive(
 ['$templateCache', function($templateCache) {
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
       '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
-      '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-      'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
+      '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs"' +
+      'active="tab.active" disable="tab.disable" ng-click="go(tab)" template-url="{{templateUrl}}">' +
+      '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
       '</div>';
 
     var INLINE_TEMPLATE =
-      '<div>' +
       '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
-      '<uib-tab class="tab" ng-repeat="tab in tabs" heading="{{tab.heading}}" ' +
-      'active="tab.active" disable="tab.disable" ng-click="go(tab)">' +
+      '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs"' +
+      'active="tab.active" disable="tab.disable" ng-click="go(tab)" template-url="{{templateUrl}}">' +
       '<ui-view></ui-view>' +
+      '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
       '</div>';

@@ -9,11 +9,13 @@ var SettingsCtrl = ['$rootScope', '$scope', '$stateParams', function($rootScope,
         heading: 'One',
         route:   'user.settings.one',
         url: 'user/settings/one/:test',
-        controller: 'ExampleCtrl'
+        controller: 'ExampleCtrl',
+        class: 'first-tab'
       },
       {
         heading: 'Two',
-        route:   'user.settings.two'
+        route:   'user.settings.two',
+        class: 'second-tab'
       }
     ];
   };
