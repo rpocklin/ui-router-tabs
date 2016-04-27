@@ -58,7 +58,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
       }
   ```
 
-1. Declare the following in your the parent HTML view template `<tabs data="tabData" type="tabs" />`.
+1. Declare the following in your the parent HTML view template `<tabs data="tabData" type="tabs"></tabs>`.
 
   Optional attributes for the `<tabs>` (which are passed on to the UI Bootstrap component) are:
 
@@ -102,9 +102,9 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
-* 2.0.0 Upgraded angular-bootstrap to v14.0, added `class` and `template-url` attributes on `uib-tab` and began using `<uib-tab-heading>` tag.
+* 2.0.0 Added `class` and `template-url` attributes on `uib-tab` and began using `<uib-tab-heading>` tag.
 * 1.8.0 Added inline template by default (as requested) and allowed customer classes parameter.
-* 1.7.0 Added `uib` prefix for UI Bootstrap elements (as per v0.14.0).    See [#47](/../../pull/47).
+* 1.7.0 Added `uib` prefix for UI Bootstrap elements (as per v0.14.0).  See [#47](/../../pull/47).  <br/>Upgraded angular-bootstrap to v14.0.
 * 1.6.0 Renamed `disabled` attribute to `disable` in line with UI Bootstrap `<tab>`.  See [#39](/../../issues/39).
 * 1.5.1 Removed `bower_components` from repository.  See [#40](/../../pull/40).
 * 1.5.0 Bumped `angular-bootstrap` dependency to v0.13.0 (fixes default tab being auto-selected).
