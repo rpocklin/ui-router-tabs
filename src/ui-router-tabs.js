@@ -86,11 +86,15 @@ angular.module('ui.router.tabs').directive(
         $scope.update_tabs = function() {
 
           // sets which tab is active (used for highlighting)
-          angular.forEach($scope.tabs, function(tab) {
+          angular.forEach($scope.tabs, function(tab, index) {
             tab.params = tab.params || {};
             tab.options = tab.options || {};
             tab.class = tab.class || '';
             tab.active = $scope.active(tab);
+
+            if ($scope.active(tab)) {
+              $scope.tabs.active = index;
+            }
           });
         };
 
@@ -106,7 +110,7 @@ angular.module('ui.router.tabs').directive(
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
       '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs"' +
-      'active="tab.active" disable="tab.disable" ng-click="go(tab)" template-url="{{templateUrl}}">' +
+      'active="tabs.active" disable="tab.disable" ng-click="go(tab)">' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
@@ -115,7 +119,7 @@ angular.module('ui.router.tabs').directive(
     var INLINE_TEMPLATE =
       '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs"' +
-      'active="tab.active" disable="tab.disable" ng-click="go(tab)" template-url="{{templateUrl}}">' +
+      'active="tabs.active" disable="tab.disable" ng-click="go(tab)">' +
       '<ui-view></ui-view>' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
