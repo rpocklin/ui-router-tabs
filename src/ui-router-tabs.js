@@ -77,7 +77,7 @@ angular.module('ui.router.tabs').directive(
         };
 
         /* whether to highlight given route as part of the current state */
-        $scope.active = function(tab) {
+        $scope.is_active = function(tab) {
 
           var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
           return isAncestorOfCurrentRoute;
@@ -90,9 +90,9 @@ angular.module('ui.router.tabs').directive(
             tab.params = tab.params || {};
             tab.options = tab.options || {};
             tab.class = tab.class || '';
-            tab.active = $scope.active(tab);
 
-            if ($scope.active(tab)) {
+            tab.active = $scope.is_active(tab);
+            if (tab.active) {
               $scope.tabs.active = index;
             }
           });
@@ -108,18 +108,18 @@ angular.module('ui.router.tabs').directive(
 ).run(
 ['$templateCache', function($templateCache) {
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
-      '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
-      '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs"' +
-      'active="tabs.active" disable="tab.disable" ng-click="go(tab)">' +
+      '<uib-tabset active="tabs.active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
+      '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
+      'disable="tab.disable" ng-click="go(tab)">' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
       '</div>';
 
     var INLINE_TEMPLATE =
-      '<uib-tabset class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
-      '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs"' +
-      'active="tabs.active" disable="tab.disable" ng-click="go(tab)">' +
+      '<uib-tabset active="tabs.active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
+      '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
+      'disable="tab.disable" ng-click="go(tab)">' +
       '<ui-view></ui-view>' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
