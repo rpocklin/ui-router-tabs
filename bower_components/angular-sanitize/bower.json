@@ -1,8 +1,8 @@
 {
-  "name": "angular-mocks",
+  "name": "angular-sanitize",
   "version": "1.5.5",
   "license": "MIT",
-  "main": "./angular-mocks.js",
+  "main": "./angular-sanitize.js",
   "ignore": [],
   "dependencies": {
     "angular": "1.5.5"
