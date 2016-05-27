@@ -116,7 +116,7 @@ angular.module('ui.router.tabs').directive(
       '</uib-tabset>' +
       '</div>';
 
-    var INLINE_TEMPLATE =
+    var INLINE_TEMPLATE = '<div>' +
       '<uib-tabset active="tabs.active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
       'disable="tab.disable" ng-click="go(tab)">' +
