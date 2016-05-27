@@ -102,6 +102,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 2.0.1 Fixed invalid html in default template (missing `<div>`).
 * 2.0.0 Added `class` and `template-url` attributes on `uib-tab` and began using `<uib-tab-heading>` tag.
 * 1.8.0 Added inline template by default (as requested) and allowed customer classes parameter.
 * 1.7.0 Added `uib` prefix for UI Bootstrap elements (as per v0.14.0).  See [#47](/../../pull/47).  <br/>Upgraded angular-bootstrap to v14.0.
