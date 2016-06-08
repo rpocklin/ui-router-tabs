@@ -68,7 +68,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
   * `class: string`
   * `templateUrl: <template url name>`
 
-  NOTE: If you use a customer template, you may need to define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
+  NOTE: If you use a custom template, you may need to define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
 
 ## Tips
 
@@ -102,6 +102,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
 
 
 ## History
+* 2.0.2 Fixed invalid `<ui-view>` placement in default template.
 * 2.0.1 Fixed invalid html in default template (missing `<div>`).
 * 2.0.0 Added `class` and `template-url` attributes on `uib-tab` and began using `<uib-tab-heading>` tag.
 * 1.8.0 Added inline template by default (as requested) and allowed customer classes parameter.

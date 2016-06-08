@@ -120,10 +120,10 @@ angular.module('ui.router.tabs').directive(
       '<uib-tabset active="tabs.active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
       'disable="tab.disable" ng-click="go(tab)">' +
-      '<ui-view></ui-view>' +
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
+      '<ui-view></ui-view>' +
       '</div>';
 
     $templateCache.put('ui-router-tabs-custom-ui-view-template.html', CUSTOM_UI_VIEW_TEMPLATE);
