@@ -103,6 +103,7 @@ describe('Directive : UI Router : Tabs', function() {
 
     view = '<tabs data="tabConfiguration" type="pills" class="someClass"></tabs>';
     sandbox = this.sandbox;
+    $templateCache.put('test.html', '<div>From template-url property</div>');
   }));
 
   var renderView = function() {
@@ -279,5 +280,26 @@ describe('Directive : UI Router : Tabs', function() {
 
     expect(get_current_state()).toEqual(previous_state);
     expect(spy.notCalled).toBeTruthy();
+  });
+
+  it('should use templateUrl to render when templateUrl is defined', function() {
+    view = '<tabs data="tabConfiguration" template-url="test.html"></tabs>';
+    renderView();
+
+    expect($ngView.find('div').eq(0).text()).toEqual('From template-url property');
+  });
+
+  it('should use ui-router-tabs-default-template.html to render when custom-ui-view is false', function() {
+    view = '<tabs data="tabConfiguration" custom-ui-view="false"></tabs>';
+    renderView();
+
+    expect($ngView.find('ui-view')[0]).toBeDefined();
+  });
+
+  it('should use ui-router-tabs-custom-ui-view-template.html to render when custom-ui-view is true', function() {
+    view = '<tabs data="tabConfiguration" custom-ui-view="true"></tabs>';
+    renderView();
+
+    expect($ngView.find('ui-view')[0]).not.toBeDefined();
   });
 });
