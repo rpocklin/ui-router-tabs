@@ -25,8 +25,19 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 }
 
 angular.module('ui.router.tabs', ['ngSanitize']);
-angular.module('ui.router.tabs').directive(
-  'tabs', ['$rootScope', '$state', function($rootScope, $state) {
+angular.module('ui.router.tabs').provider(
+  'uiRouterTabsConfig',
+  function() {
+    this.setUseCustomUiView = function(useCustomUiView) {
+      this.useCustomUiView = useCustomUiView;
+    };
+
+    this.$get = function() {
+      return this;
+    };
+  }
+).directive(
+  'tabs', ['$rootScope', '$state', 'uiRouterTabsConfig', function($rootScope, $state, uiRouterTabsConfig) {
 
     return {
       restrict: 'E',
@@ -99,12 +110,20 @@ angular.module('ui.router.tabs').directive(
         };
 
         $scope.update_tabs();
-    }],
+      }],
       templateUrl: function(element, attributes) {
-        return attributes.templateUrl || 'ui-router-tabs-default-template.html';
+        if (attributes.templateUrl) {
+          return attributes.templateUrl;
+        }
+
+        if (attributes.customUiView === 'false') {
+          return 'ui-router-tabs-default-template.html';
+        }
+
+        return uiRouterTabsConfig.useCustomUiView || attributes.customUiView === 'true' ? 'ui-router-tabs-custom-ui-view-template.html' : 'ui-router-tabs-default-template.html';
       }
     };
-}]
+  }]
 ).run(
 ['$templateCache', function($templateCache) {
     var CUSTOM_UI_VIEW_TEMPLATE = '<div>' +
@@ -128,5 +147,5 @@ angular.module('ui.router.tabs').directive(
 
     $templateCache.put('ui-router-tabs-custom-ui-view-template.html', CUSTOM_UI_VIEW_TEMPLATE);
     $templateCache.put('ui-router-tabs-default-template.html', INLINE_TEMPLATE);
-}]
+  }]
 );
