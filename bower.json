@@ -23,7 +23,7 @@
   "dependencies": {
     "angular": "^1.4.0",
     "angular-bootstrap": "^1.2.1",
-    "angular-ui-router": "^0.2.14",
+    "angular-ui-router": "^1.0.3",
     "angular-sanitize": "^1.4.0"
   },
   "devDependencies": {
