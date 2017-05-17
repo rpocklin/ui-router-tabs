@@ -26,7 +26,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 
 angular.module('ui.router.tabs', ['ngSanitize']);
 angular.module('ui.router.tabs').directive(
-  'tabs', ['$rootScope', '$state', function($rootScope, $state) {
+  'tabs', ['$transitions', '$state', function($transitions, $state) {
 
     return {
       restrict: 'E',
@@ -43,15 +43,11 @@ angular.module('ui.router.tabs').directive(
           scope.update_tabs();
         };
 
-        var unbindStateChangeSuccess = $rootScope.$on('$stateChangeSuccess', updateTabs);
-        var unbindStateChangeError = $rootScope.$on('$stateChangeError', updateTabs);
-        var unbindStateChangeCancel = $rootScope.$on('$stateChangeCancel', updateTabs);
-        var unbindStateNotFound = $rootScope.$on('$stateNotFound', updateTabs);
+        var unbindStateChangeSuccess = $transitions.onSuccess({}, updateTabs);
+        var unbindStateChangeError = $transitions.onError({}, updateTabs);
 
         scope.$on('$destroy', unbindStateChangeSuccess);
         scope.$on('$destroy', unbindStateChangeError);
-        scope.$on('$destroy', unbindStateChangeCancel);
-        scope.$on('$destroy', unbindStateNotFound);
       },
       controller: ['$scope', function($scope) {
 
