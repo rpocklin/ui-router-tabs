@@ -53,12 +53,12 @@ afterEach(function() {
 
 describe('Directive : UI Router : Tabs', function() {
 
-  var root_scope, isolate_scope, scope, directive_scope, view, element, state, sandbox, spy;
+  var transitions, isolate_scope, scope, directive_scope, view, element, state, sandbox, spy;
   var createView, get_current_state, get_current_params;
   var $ngView;
   var params = {};
 
-  beforeEach(inject(function($rootScope, $state, $templateCache) {
+  beforeEach(inject(function($rootScope, $transitions, $state, $templateCache) {
 
     createView = function(html, scope) {
       element = angular.element(view);
@@ -76,7 +76,7 @@ describe('Directive : UI Router : Tabs', function() {
     scope = $rootScope.$new();
     state = $state;
 
-    root_scope = $rootScope;
+    transitions = $transitions;
 
     get_current_state = function() {
       return state.current.name;
@@ -170,7 +170,7 @@ describe('Directive : UI Router : Tabs', function() {
     expect(get_current_state()).not.toEqual(previous_state);
   });
 
-  it('should not change the route or active tab heading if a $stateChangeStart handler cancels the route change', function() {
+  it('should not change the route or active tab heading if a $transitions.onStart handler cancels the route change', function() {
 
     view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
@@ -181,8 +181,8 @@ describe('Directive : UI Router : Tabs', function() {
 
     scope.$apply();
 
-    root_scope.$on('$stateChangeStart', function(event) {
-      event.preventDefault();
+    transitions.onStart({}, function() {
+      return false;
     });
 
     var targetTabIndex = 2;
@@ -195,7 +195,7 @@ describe('Directive : UI Router : Tabs', function() {
     expect(scope.tabConfiguration[initialTabIndex].active).toBeTruthy();
   });
 
-  it('should not change the route or active tab heading if a $stateChangeError event triggers during the route change', function() {
+  it('should not change the route or active tab heading if a state change fails during the route change', function() {
 
     view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
@@ -218,7 +218,7 @@ describe('Directive : UI Router : Tabs', function() {
     expect(scope.tabConfiguration[initialTabIndex].active).toBeTruthy();
   });
 
-  it('should not change the route or active tab heading if a $stateNotFound event triggers during the route change', function() {
+  it('should not change the route or active tab heading if a state is not found during the route change', function() {
 
     view = '<tabs data="tabConfiguration"></tabs>';
     renderView();
