@@ -67,6 +67,7 @@ Leverages [UI Bootstrap](http://angular-ui.github.io/bootstrap/) and [UI Router]
   * `justified: boolean`
   * `class: string`
   * `templateUrl: <template url name>`
+  * `disableUiView: boolean`
 
   NOTE: If you use a custom template, you may need to define a `ui-view` placeholder for the child content panes in the same HTML view template eg. `<ui-view></ui-view>`.
 

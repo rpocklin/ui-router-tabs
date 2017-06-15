@@ -35,7 +35,8 @@ angular.module('ui.router.tabs').directive(
         type: '@',
         justified: '@',
         vertical: '@',
-        class: '@'
+        class: '@',
+        disableUiView: '='
       },
       link: function(scope) {
 
@@ -68,6 +69,10 @@ angular.module('ui.router.tabs').directive(
           var isEqual = $state.is(tab.route, tab.params, tab.options);
           return isEqual;
         };
+
+        if ($scope.disableUiView === null || $scope.disableUiView === undefined) {
+          $scope.disableUiView = false;
+        }
 
         $scope.go = function(tab) {
 
@@ -123,7 +128,7 @@ angular.module('ui.router.tabs').directive(
       '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
-      '<ui-view></ui-view>' +
+      '<ui-view ng-if="!disableUiView"></ui-view>' +
       '</div>';
 
     $templateCache.put('ui-router-tabs-custom-ui-view-template.html', CUSTOM_UI_VIEW_TEMPLATE);
