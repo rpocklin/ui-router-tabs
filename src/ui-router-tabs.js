@@ -27,7 +27,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 angular.module('ui.router.tabs', ['ngSanitize']);
 angular.module('ui.router.tabs').directive(
   'tabs', ['$rootScope', '$state', function($rootScope, $state) {
-
     return {
       restrict: 'E',
       scope: {
@@ -80,6 +79,10 @@ angular.module('ui.router.tabs').directive(
         $scope.is_active = function(tab) {
 
           var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
+          // check if it's a parent tab
+          if (tab.baseParent) {
+            isAncestorOfCurrentRoute = _.includes($state.current.name, tab.baseParent);
+          }
           return isAncestorOfCurrentRoute;
         };
 
@@ -92,6 +95,10 @@ angular.module('ui.router.tabs').directive(
             tab.class = tab.class || '';
 
             tab.active = $scope.is_active(tab);
+            if (tab.baseParent){
+              tab.disable = $scope.is_active(tab);
+              tab.class = tab.class ? tab.class + ' parent-tab' : 'parent-tab';
+            }
             if (tab.active) {
               $scope.tabs.active = index;
             }
