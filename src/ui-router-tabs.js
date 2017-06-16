@@ -95,7 +95,7 @@ angular.module('ui.router.tabs').directive(
             tab.class = tab.class || '';
 
             tab.active = $scope.is_active(tab);
-            if (tab.baseParent){
+            if (tab.baseParent) {
               tab.disable = $scope.is_active(tab);
               tab.class = tab.class ? tab.class + ' parent-tab' : 'parent-tab';
             }
