@@ -25,9 +25,29 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
 }
 
 angular.module('ui.router.tabs', ['ngSanitize']);
+angular.module('ui.router.tabs').directive('compileHeader', ['$compile', function($compile) {
+  return function(scope, element, attrs) {
+    scope.$watch(
+      function(scope) {
+        // watch the 'compile' expression for changes
+        return scope.$eval(attrs.compileHeader);
+      },
+      function(value) {
+        // when the 'compile' expression changes
+        // assign it into the current DOM
+        element.html(value);
+
+        // compile the new DOM and link it to the current
+        // scope.
+        // NOTE: we only compile .childNodes so that
+        // we don't get into infinite loop compiling ourselves
+        $compile(element.contents())(scope);
+      }
+    );
+  };
+}]);
 angular.module('ui.router.tabs').directive(
   'tabs', ['$rootScope', '$state', function($rootScope, $state) {
-
     return {
       restrict: 'E',
       scope: {
@@ -80,6 +100,10 @@ angular.module('ui.router.tabs').directive(
         $scope.is_active = function(tab) {
 
           var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
+          // check if it's a parent tab
+          if (tab.baseParent) {
+            isAncestorOfCurrentRoute = _.includes($state.current.name, tab.baseParent);
+          }
           return isAncestorOfCurrentRoute;
         };
 
@@ -92,6 +116,10 @@ angular.module('ui.router.tabs').directive(
             tab.class = tab.class || '';
 
             tab.active = $scope.is_active(tab);
+            if (tab.baseParent) {
+              tab.disable = $scope.is_active(tab);
+              tab.class = tab.class ? tab.class + ' parent-tab' : 'parent-tab';
+            }
             if (tab.active) {
               $scope.tabs.active = index;
             }
@@ -120,7 +148,7 @@ angular.module('ui.router.tabs').directive(
       '<uib-tabset active="tabs.active" class="tab-container" type="{{type}}" vertical="{{vertical}}" justified="{{justified}}" class="{{class}}">' +
       '<uib-tab class="tab {{tab.class}}" ng-repeat="tab in tabs" ' +
       'disable="tab.disable" ng-click="go(tab)">' +
-      '<uib-tab-heading ng-bind-html="tab.heading"></uib-tab-heading>' +
+      '<uib-tab-heading compile-header="tab.heading"></uib-tab-heading>' +
       '</uib-tab>' +
       '</uib-tabset>' +
       '<ui-view></ui-view>' +
