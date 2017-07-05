@@ -64,7 +64,6 @@ angular.module('ui.router.tabs').directive(
         }
 
         var currentStateEqualTo = function(tab) {
-
           var isEqual = $state.is(tab.route, tab.params, tab.options);
           return isEqual;
         };
@@ -76,11 +75,39 @@ angular.module('ui.router.tabs').directive(
           }
         };
 
+        $scope.is_sibling = function(tab) {
+          var isSiblingOfCurrentRoute = false;
+
+          if (tab && tab.route && tab.route.indexOf('.') > -1) {
+            var previousRoutePath = $state.current.name.split('.');
+            var currentRoutePath = tab.route.split('.');
+            // console.log('old:', previousRoutePath);
+            // console.log('new:', currentRoutePath);
+            var isSibling = true;
+            for (var i = 0; i < currentRoutePath.length - 2; i++) {
+              if (previousRoutePath[i] !== currentRoutePath[i]) {
+                isSibling = false;
+              }
+            }
+            isSiblingOfCurrentRoute = isSibling;
+          }
+
+          return isSiblingOfCurrentRoute;
+        };
+
         /* whether to highlight given route as part of the current state */
         $scope.is_active = function(tab) {
 
-          var isAncestorOfCurrentRoute = $state.includes(tab.route, tab.params, tab.options);
-          return isAncestorOfCurrentRoute;
+          // console.log('existing route:', $state.current.name);
+          // console.log('new route:', tab);
+
+          var isAncestorOfCurrentRoute = !!$state.includes(tab.route, tab.params, tab.options);
+          var isSiblingOfCurrentRoute = $scope.is_sibling(tab);
+
+          // console.log('is ancestor:', isAncestorOfCurrentRoute);
+          // console.log('is sibling:', isSiblingOfCurrentRoute);
+          // console.log('is equal:', currentStateEqualTo(tab));
+          return isAncestorOfCurrentRoute || isSiblingOfCurrentRoute || currentStateEqualTo(tab);
         };
 
         $scope.update_tabs = function() {
@@ -92,6 +119,7 @@ angular.module('ui.router.tabs').directive(
             tab.class = tab.class || '';
 
             tab.active = $scope.is_active(tab);
+
             if (tab.active) {
               $scope.tabs.active = index;
             }
