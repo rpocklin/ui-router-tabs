@@ -211,11 +211,14 @@ describe('Directive : UI Router : Tabs', function() {
     var targetTabIndex = 2;
     var targetRoute = scope.tabConfiguration[targetTabIndex].route;
 
-    state.go(targetRoute);
-    scope.$apply();
-
-    expect(get_current_state()).toEqual(initialRoute);
-    expect(scope.tabConfiguration[initialTabIndex].active).toBeTruthy();
+    try {
+      state.go(targetRoute);
+      scope.$apply();
+    }
+    catch (e) {
+      expect(get_current_state()).toEqual(initialRoute);
+      expect(scope.tabConfiguration[initialTabIndex].active).toBeTruthy();
+    }
   });
 
   it('should not change the route or active tab heading if a $stateNotFound event triggers during the route change', function() {
@@ -279,5 +282,55 @@ describe('Directive : UI Router : Tabs', function() {
 
     expect(get_current_state()).toEqual(previous_state);
     expect(spy.notCalled).toBeTruthy();
+  });
+
+  describe('is active', function() {
+    it('should highlight the active tab for the same route', function() {
+
+      var tabIndex = 0;
+      renderView();
+
+      $ngView.find('a').eq(tabIndex).click();
+
+      scope.$apply();
+      spy.reset();
+
+      expect(directive_scope.is_active(scope.tabConfiguration[tabIndex])).toBeTruthy();
+    });
+
+    it('should highlight the active tab for sibling routes', function() {
+
+      var firstTabIndex = 1;
+      renderView();
+
+      $ngView.find('a').eq(firstTabIndex).click();
+
+      scope.$apply();
+      spy.reset();
+
+      var secondTabIndex = 2;
+
+      $ngView.find('a').eq(secondTabIndex).click();
+      scope.$apply();
+
+      expect(directive_scope.is_active(scope.tabConfiguration[firstTabIndex])).toBeTruthy();
+    });
+    it('should highlight the active tab for common ancestor routes', function() {
+
+      var firstTabIndex = 0;
+      renderView();
+
+      $ngView.find('a').eq(firstTabIndex).click();
+
+      scope.$apply();
+      spy.reset();
+
+      var secondTabIndex = 2;
+
+      $ngView.find('a').eq(secondTabIndex).click();
+      scope.$apply();
+
+      expect(directive_scope.is_active(scope.tabConfiguration[firstTabIndex])).toBeTruthy();
+    });
   });
 });
